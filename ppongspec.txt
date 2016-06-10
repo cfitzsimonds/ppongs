@@ -1,0 +1,8 @@
+-Need to register a game in some fashion, could be touch screen people selection, could be Phone login
+-Need to store game records
+-View of Head to Head records
+-View of Personal Record
+-Game Footage or Images
+-Game Results posted to Yammer (Score, Players..)
+	>register app
+	>get id 
