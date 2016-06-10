@@ -1,8 +1,20 @@
 -Need to register a game in some fashion, could be touch screen people selection, could be Phone login
+	>Last thing we do is auth
+	>Have a page, add a game
 -Need to store game records
+	>Simple table
+		-Can use azure 
+		-Woudl prefer firebase
+		-Mongo also option
 -View of Head to Head records
+	>covered below
 -View of Personal Record
+	>Default view shows all games
+	>Simple lookup filter to go between any games containing any two players
 -Game Footage or Images
+	>Upload box in submit
+	>Attach URL
+	>Lower priority
 -Game Results posted to Yammer (Score, Players..)
 	>register app
 	>get id 
