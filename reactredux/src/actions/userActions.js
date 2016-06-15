@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import gameApi from '../api/ppongApi';
+import userApi from '../api/userApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function loadUsersSuccess(users){
@@ -17,7 +17,7 @@ export function updateUserSuccess(user) {
 export function loadUsers() {
   return function(dispatch){
     dispatch(beginAjaxCall());
-    return gameApi.getAllGames().then(users => {
+    return userApi.getAllUsers().then(users => {
       dispatch(loadUsersSuccess(users));
     }).catch(error => {
       throw(error);
@@ -28,7 +28,7 @@ export function loadUsers() {
 export function saveUser(user) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
-    return gameApi.saveGame(user).then(savedUser => {
+    return userApi.saveUser(user).then(savedUser => {
       user.id ? dispatch(updateUserSuccess(savedUser)):
         dispatch(createUserSuccess(savedUser));
     }).catch(error => {

@@ -3,12 +3,14 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
 import {browserHistory} from 'react-router';
+import toastr from 'toastr';
 
 class UsersPage extends React.Component {
   constructor(props, context){
     super(props, context);
     this.redirectToAddUserPage = this.redirectToAddUserPage.bind(this);
     this.render = this.render.bind(this);
+    this.convertToStoreUser = this.convertToStoreUser.bind(this);
     //this.setState({currentUser: "In"});
     let temp = (firebase.auth().currentUser) ? "Out": "In";
      this.state = {
@@ -22,6 +24,36 @@ class UsersPage extends React.Component {
       this.setState({currentUser: Object.assign({}, nextProps.currentUser)});
     }
   }
+  redirect(){
+    toastr.success('Logged in');
+    this.context.router.push('/games');
+  }
+  convertToStoreUser(googUser){
+    let newUser = {};
+    newUser["displayName"] = googUser.displayName;
+    newUser.uid = googUser.uid;
+    newUser.email = googUser.email;
+    // handle leagues later
+    newUser.proPic = googUser.photoURL;
+    // might need refreshtoken later?
+    this.setState({user: newUser});
+  }
+  saveUser() {
+    event.preventDefault();
+    let user = this.state.user;
+    this.setState({saving: true});
+
+    //let scorecomp = 1;
+    //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
+
+    this.props.actions.saveUser(this.state.user)
+      .then(() => this.redirect())
+      .catch(error => {
+        toastr.error(error);
+        this.setState({saving: false});
+      });
+  }
+
   userRow(user, index){
     return <div key={index}>hello</div>;
   }
@@ -34,7 +66,9 @@ class UsersPage extends React.Component {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // The signed-in user info.
-        result.user
+        console.log(result.user);
+        this.convertToStoreUser(result.user);
+        this.saveUser();
         this.setState({currentUser: "Out"});
 
         // ...
@@ -68,6 +102,8 @@ class UsersPage extends React.Component {
   }
 }
 
+
+
 UsersPage.propTypes = {
   users: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
@@ -78,7 +114,9 @@ function mapStateToProps(state, ownProps){
     users: state.users
   };
 }
-
+UsersPage.contextTypes = {
+  router: PropTypes.object
+};
 ////
 function mapDispatchToProps(dispatch) {
   return {

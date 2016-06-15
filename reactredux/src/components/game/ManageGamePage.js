@@ -37,6 +37,12 @@ class ManageGamePage extends React.Component {
     }else {
       game[field] = event.target.value;
     }
+    if ((this.state.game.scores.left === this.state.game.scores.right)) {
+      game.winner = "Neither";
+    } else {
+      game.winner = (this.state.game.scores.left > this.state.game.scores.right) ?
+        "Left" : "Right";
+    }
 
 
     return this.setState({game: game});
@@ -44,17 +50,12 @@ class ManageGamePage extends React.Component {
 
   saveGame(event){
     event.preventDefault();
-    let game = this.state.game;
     this.setState({saving: true});
 
     //let scorecomp = 1;
     //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
-    if ((this.state.game.scores.left === this.state.game.scores.right)) {
-      game.winner = "Neither";
-    } else {
-      game.winner = (this.state.game.scores.left > this.state.game.scores.right) ?
-        "Left" : "Right";
-    }
+    
+    //this.setState({game:game});
     this.props.actions.saveGame(this.state.game)
       .then(() => this.redirect())
       .catch(error => {

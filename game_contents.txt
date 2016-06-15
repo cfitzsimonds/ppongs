@@ -9,4 +9,6 @@ Name of Right Player 2
 Score of Left team
 Score of Right team
 
-game unique id: (calculated as running number of games)
+game unique id: time since epoch that game was submitted at
+
+league name
