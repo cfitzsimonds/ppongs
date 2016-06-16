@@ -5,6 +5,10 @@ import * as userActions from '../../actions/userActions';
 import UserList from './UserList';
 import {browserHistory} from 'react-router';
 
+
+
+
+// DEPRECIATED
 class UsersPage extends React.Component {
   constructor(props, context){
     super(props, context);

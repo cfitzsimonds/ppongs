@@ -12,18 +12,29 @@ class UsersPage extends React.Component {
     this.redirectToAddUserPage = this.redirectToAddUserPage.bind(this);
     this.render = this.render.bind(this);
     this.convertToStoreUser = this.convertToStoreUser.bind(this);
+    //this.checkAuth = this.checkAuth.bind(this);
     //this.setState({currentUser: "In"});
-    let temp = (firebase.auth().currentUser) ? "out": "in";
+    //let temp = (firebase.auth().currentUser) ? "out": "in";
      this.state = {
-      currentUser : temp
+      currentUser : 'in'
     }
 
   }
 
+  componentDidMount(){
+    if(!(/[^a-zA-Z0-9]/.test(localStorage.getItem('user')))){
+      this.setState({currentUser: "out"});
+    } else {
+      this.setState({currentUser: "in"});
+    }
+};
+
+
   redirect(){
+    localStorage.setItem('user', firebase.auth().currentUser.uid);
     toastr.success('Logged in');
 
-    this.context.router.push('/games');
+    this.context.router.push('/users');
     //console.log(this.props.users);
   }
   convertToStoreUser(googUser){
@@ -32,10 +43,19 @@ class UsersPage extends React.Component {
     newUser.uid = googUser.uid;
     newUser.email = googUser.email;
     // handle leagues later
-    newUser.proPic = googUser.photoURL;
+    newUser.proPic = (googUser.photoURL || 'http://i.imgur.com/Zui7Sop.png');
     // might need refreshtoken later?
     this.setState({user: newUser});
   }
+
+  checkAuth(){
+    if(firebase.auth().currentUser){
+      this.setState({currentUser: "out"});
+    } else {
+      this.setState({currentUser: "in"});
+    }
+  }
+
   saveUser() {
     event.preventDefault();
     let user = this.state.user;
@@ -52,9 +72,7 @@ class UsersPage extends React.Component {
       });
   }
 
-  userRow(user, index){
-    return <div key={index}>hello</div>;
-  }
+
 
   redirectToAddUserPage(){
     //browserHistory.push('/user');
@@ -75,30 +93,36 @@ class UsersPage extends React.Component {
       }.bind(this));
     } else {
       firebase.auth().signOut();
+      localStorage.setItem('user', "not here");
       toastr.success('Logged out');
-      this.state.currentUser = "in";
+      this.setState({currentUser : "in"});
       //console.log("out")
       this.forceUpdate();
     }
   }
 
   render() {
-    this.state.currentUser = (firebase.auth().currentUser) ? "out": "in";
+    //this.state.currentUser = (firebase.auth().currentUser) ? "out": "in";
     const {users} = this.props;
-        let logButtonText = (firebase.auth().currentUser ) ? null : null;
-    //this.state.currentUser
-    //let logButtonText = "Log in";
+    //this.checkAuth();
+    let loggedout = (<div>
+      <h1>Users</h1>
+      <input type="submit"
+             value={"Log " + (this.state.currentUser)}
+             className="btn btn-primary"
+             onClick={this.redirectToAddUserPage}
+      />
+    </div>);
+    let loggedin = (<div>
+      <h1>HAHA</h1>
+      <input type="submit"
+             value={"Log " + (this.state.currentUser)}
+             className="btn btn-primary"
+             onClick={this.redirectToAddUserPage}
+      />
+    </div>);
+    return ((!(/[^a-zA-Z0-9]/.test(localStorage.getItem('user'))))? loggedin : (loggedout)
 
-    return (
-      <div>
-        <h1>Users</h1>
-        <input type="submit"
-               value={"Log " + (this.state.currentUser)}
-               className="btn btn-primary"
-               onClick={this.redirectToAddUserPage}
-        />
-        <UserList users={users} />
-      </div>
     );
   }
 }
@@ -125,6 +149,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 export default connect(mapStateToProps, mapDispatchToProps)(UsersPage);
 // can define a mapDispatchToProps but is automatically replaced by dispatch atm
 
