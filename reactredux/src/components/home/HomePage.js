@@ -4,7 +4,11 @@ import {Link} from 'react-router';
 
 class HomePage extends React.Component {
   render() {
-
+    if(firebase.auth().currentUser){
+      console.log(firebase.auth().currentUser);
+    } else {
+      console.log("not accessible");
+    }
     return (
       <div className="jumbotron">
         <h1>Pluralsight Administration</h1>

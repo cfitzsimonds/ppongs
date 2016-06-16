@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
 import {browserHistory} from 'react-router';
+import UserList from './UserList';
 import toastr from 'toastr';
 
 class UsersPage extends React.Component {
@@ -12,21 +13,18 @@ class UsersPage extends React.Component {
     this.render = this.render.bind(this);
     this.convertToStoreUser = this.convertToStoreUser.bind(this);
     //this.setState({currentUser: "In"});
-    let temp = (firebase.auth().currentUser) ? "Out": "In";
+    let temp = (firebase.auth().currentUser) ? "out": "in";
      this.state = {
       currentUser : temp
     }
 
   }
-  componentWillReceiveProps(nextProps){
-    if ( this.props.currentUser != nextProps.currentUser) {
-      // handles refresh, runs anytime it thinks props might have chagned
-      this.setState({currentUser: Object.assign({}, nextProps.currentUser)});
-    }
-  }
+
   redirect(){
     toastr.success('Logged in');
+
     this.context.router.push('/games');
+    //console.log(this.props.users);
   }
   convertToStoreUser(googUser){
     let newUser = {};
@@ -66,26 +64,28 @@ class UsersPage extends React.Component {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // The signed-in user info.
-        console.log(result.user);
+        //console.log(result.user);
         this.convertToStoreUser(result.user);
         this.saveUser();
-        this.setState({currentUser: "Out"});
+        this.setState({currentUser: "out"});
 
         // ...
       }.bind(this)).then(function (result) {
-        console.log(this.state.currentUser);
+
       }.bind(this));
     } else {
       firebase.auth().signOut();
-      console.log("out")
+      toastr.success('Logged out');
+      this.state.currentUser = "in";
+      //console.log("out")
       this.forceUpdate();
-      this.setState({currentUser: "In"});
     }
   }
 
   render() {
+    this.state.currentUser = (firebase.auth().currentUser) ? "out": "in";
     const {users} = this.props;
-    let logButtonText = (firebase.auth().currentUser ) ? null : null;
+        let logButtonText = (firebase.auth().currentUser ) ? null : null;
     //this.state.currentUser
     //let logButtonText = "Log in";
 
@@ -97,6 +97,7 @@ class UsersPage extends React.Component {
                className="btn btn-primary"
                onClick={this.redirectToAddUserPage}
         />
+        <UserList users={users} />
       </div>
     );
   }

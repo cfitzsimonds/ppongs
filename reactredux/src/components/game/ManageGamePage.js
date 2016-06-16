@@ -69,6 +69,7 @@ class ManageGamePage extends React.Component {
     this.setState({saving: false});
     toastr.success('Game saved');
     this.context.router.push('/games');
+    
   }
 
   render(){

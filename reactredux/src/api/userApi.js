@@ -2,47 +2,53 @@ class UserApi {
 
 
   static saveUser(user) {
-    user = Object.assign({}, user); // to avoid manipulating object passed in.
+    //user = Object.assign({}, user); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
-
-      // Simulate server-side validation
-      const minUserTitleLength = 1;
-
-      // need rejection if any field is not filled
-      /*if (user.title.length < minUserTitleLength) {
-       reject(`Title must be at least ${minUserTitleLength} characters.`);
-       }*/
-      let hold = 1;
-      firebase.database().ref("users").orderByChild("uid").on("child_added", function(snapshot) {
-        if(snapshot.val().uid === user.uid) {
-          let x = {};
-          x[snapshot.getKey()] = user;
-          firebase.database().ref("users").update(x);
-          hold = 0;
-        }
-      });
-      if (hold){
-        user.statistics = {
-          wins: {
-            singles: 0,
-            doubles: 0
-          },
-          losses: {
-            singles: 0,
-            doubles: 0
-          },
-          draws: {
-            singles: 0,
-            doubles: 0
-          },
-          games_played: {
-            singles: 0,
-            doubles: 0
+      UserApi.getAllUsers().then((users) => {
+        var inside = false;
+        console.log(user);
+        for (var i in users){
+          if(users[i].uid == user.uid){
+            firebase.database().ref("users").orderByChild("id").on("child_added", function(snapshot) {
+              if (snapshot.val().uid === user.uid) {
+                let x = snapshot.val();
+                x.email = user.email;
+                x.proPic = user.proPic;
+                x.displayName = user.displayName;
+                let y = {};
+                y[snapshot.getKey()] = x;
+                firebase.database().ref("users").update(y);
+              }
+            });
+            inside = true;
           }
-        };
+        }
+        if( !inside){
+          user.statistics = {
+            wins: {
+              singles: 0,
+              doubles: 0
+            },
+            losses: {
+              singles: 0,
+              doubles: 0
+            },
+            draws: {
+              singles: 0,
+              doubles: 0
+            },
+            games_played: {
+              singles: 0,
+              doubles: 0
+            }
+          };
+          user.leagues = ['all'];
 
-        firebase.database().ref("users/").push(user);
-      }
+          firebase.database().ref("users/").push(user);
+
+        }
+
+
         // add
         //Just simulating creation here.
         //The server would generate ids and watchHref's for new courses in a real app.
@@ -56,10 +62,10 @@ class UserApi {
         //update
         firebase.database().ref("users").orderByChild("id").on("child_added", function(snapshot) {
           if(snapshot.val().id === user.id) {
-            let x = {};
-            x[snapshot.getKey()] = user;
-            firebase.database().ref("users").update(x);
-          }
+       let x = {};
+       x[snapshot.getKey()] = user;
+       firebase.database().ref("users").update(x);
+       }
         });
 
       } else {
@@ -75,17 +81,21 @@ class UserApi {
 
       resolve(user);
     });
+    })
   }
 
   static getAllUsers() {
     return new Promise((resolve,  reject) => {
       firebase.database().ref("users/").on('value', function (data) {
-        //console.log(data.val());
+        //console.log(firebase.auth().currentUser);
         let v = [];
         for (var key in data.val())
         {
+
           v.push(data.val()[key]);
+
         }
+
         resolve(v);
 
       }.bind(this));
