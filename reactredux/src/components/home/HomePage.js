@@ -4,15 +4,14 @@ import {Link} from 'react-router';
 
 class HomePage extends React.Component {
   render() {
-    if(firebase.auth().currentUser){
-      console.log(firebase.auth().currentUser);
-    } else {
-      console.log("not accessible");
-    }
-    return (
+    //console.log(JSON.parse(localStorage.getItem('user')));
+
+
+
+        return (
       <div className="jumbotron">
-        <h1>Pluralsight Administration</h1>
-        <p>React, Redux, and React Router in ES6 for ultra-responsive web apps</p>
+        <h1>PPong</h1>
+        <p>React, Redux, and React Router in ES6 based ping pong scoretracker</p>
         <Link to="about" className="btn btn-primary btn-lg">Learn More</Link>
         </div>
     );

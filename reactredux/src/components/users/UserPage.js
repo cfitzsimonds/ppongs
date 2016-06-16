@@ -22,7 +22,7 @@ class UsersPage extends React.Component {
   }
 
   componentDidMount(){
-    if(!(/[^a-zA-Z0-9]/.test(localStorage.getItem('user')))){
+    if(!(/[^a-zA-Z0-9]/.test(localStorage.getItem('userid')))){
       this.setState({currentUser: "out"});
     } else {
       this.setState({currentUser: "in"});
@@ -31,7 +31,7 @@ class UsersPage extends React.Component {
 
 
   redirect(){
-    localStorage.setItem('user', firebase.auth().currentUser.uid);
+    localStorage.setItem('userid', firebase.auth().currentUser.uid);
     toastr.success('Logged in');
 
     this.context.router.push('/users');
@@ -93,7 +93,7 @@ class UsersPage extends React.Component {
       }.bind(this));
     } else {
       firebase.auth().signOut();
-      localStorage.setItem('user', "not here");
+      localStorage.setItem('userid', "not here");
       toastr.success('Logged out');
       this.setState({currentUser : "in"});
       //console.log("out")
@@ -121,7 +121,7 @@ class UsersPage extends React.Component {
              onClick={this.redirectToAddUserPage}
       />
     </div>);
-    return ((!(/[^a-zA-Z0-9]/.test(localStorage.getItem('user'))))? loggedin : (loggedout)
+    return ((!(/[^a-zA-Z0-9]/.test(localStorage.getItem('userid'))))? loggedin : (loggedout)
 
     );
   }

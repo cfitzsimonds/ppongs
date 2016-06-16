@@ -1,0 +1,13 @@
+create dynamic search form allowing buttons to click on names
+create database to store users
+create database of leagues
+
+
+look at avatar content 
+http://materializecss.com/collections.html#!
+
+create based on that for a selector for who you are playing against
+
+
+//where i store all current user data
+(JSON.parse(localStorage.getItem('user'))

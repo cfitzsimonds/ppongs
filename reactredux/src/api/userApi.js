@@ -6,7 +6,7 @@ class UserApi {
     return new Promise((resolve, reject) => {
       UserApi.getAllUsers().then((users) => {
         var inside = false;
-        console.log(user);
+        //console.log(user);
         for (var i in users){
           if(users[i].uid == user.uid){
             firebase.database().ref("users").orderByChild("id").on("child_added", function(snapshot) {
@@ -18,6 +18,7 @@ class UserApi {
                 let y = {};
                 y[snapshot.getKey()] = x;
                 firebase.database().ref("users").update(y);
+                localStorage.setItem('user', JSON.stringify(y[snapshot.getKey()]));
               }
             });
             inside = true;
@@ -45,7 +46,7 @@ class UserApi {
           user.leagues = ['all'];
 
           firebase.database().ref("users/").push(user);
-
+          localStorage.setItem('user', user);
         }
 
 
