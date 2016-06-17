@@ -11,3 +11,11 @@ create based on that for a selector for who you are playing against
 
 //where i store all current user data
 (JSON.parse(localStorage.getItem('user')))
+
+next on the list:
+
+create the user page, displaying basic information about them
+- can probably take a look at how games and classes are structured, make it like that but with more info
+
+add leagues and by default filtering by them
+- go based off of current user (or selected league)

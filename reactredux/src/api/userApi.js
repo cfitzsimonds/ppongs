@@ -12,9 +12,12 @@ class UserApi {
             firebase.database().ref("users").orderByChild("id").on("child_added", function(snapshot) {
               if (snapshot.val().uid === user.uid) {
                 let x = snapshot.val();
-                x.email = user.email;
-                x.proPic = user.proPic;
-                x.displayName = user.displayName;
+                for (var thing in user){
+                  x[thing] = (user[thing] || x[thing])
+                }
+                //x.email = user.email;
+                //x.proPic = user.proPic;
+                //x.displayName = user.displayName;
                 let y = {};
                 y[snapshot.getKey()] = x;
                 firebase.database().ref("users").update(y);

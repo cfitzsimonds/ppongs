@@ -43,6 +43,10 @@ class ManageGamePage extends React.Component {
     } else {
       game.winner = (this.state.game.scores.left > this.state.game.scores.right) ?
         "Left" : "Right";
+      game.winner_id = (this.state.game.scores.left > this.state.game.scores.right) ?
+        game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
+      game.loser_id = (this.state.game.scores.left < this.state.game.scores.right) ?
+      game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
     }
 
 
@@ -68,7 +72,59 @@ class ManageGamePage extends React.Component {
 
   redirect() {
     this.setState({saving: false});
+    let thisgame = this.state.game;
+    let temp = uidLookup(thisgame.player_names.player_l_1, this.props.users);
+    let leftwinner = 1;
+    let rightwinner = 1;
+    let draw = 1;
+    let matchtype = "";
+
     //this.props.useractions.saveUser()
+    if (thisgame.game_type === 2){
+      matchtype = "doubles";
+    } else {
+      matchtype = "singles";
+
+    }
+    if(thisgame.winner === "Right"){
+      leftwinner = 0;
+      rightwinner = 1;
+      draw = 0;
+    } else if (thisgame.winner === "Left"){
+      leftwinner = 1;
+      rightwinner = 0;
+      draw = 0;
+    } else {
+      leftwinner = 0;
+      rightwinner = 0;
+      draw = 1;
+    }
+
+    for (var i in thisgame.player_names){
+      temp = uidLookup(thisgame.player_names[i], this.props.users);
+      if(temp == false){
+        continue;
+      }
+      temp.statistics.games_played[matchtype] += 1;
+      if(i.indexOf("2") > -1 && matchtype === "singles"){
+        continue;
+      }
+      if(i.indexOf("r") > -1 ){
+        temp.statistics.wins[matchtype] += rightwinner;
+        temp.statistics.losses[matchtype] += leftwinner;
+        temp.statistics.draws[matchtype] += draw;
+      } else {
+        temp.statistics.wins[matchtype] += leftwinner;
+        temp.statistics.losses[matchtype] += rightwinner;
+        temp.statistics.draws[matchtype] += draw;
+      }
+      this.props.useractions.saveUser(temp).catch(error => {
+        toastr.error(error);
+        this.setState({saving: false});
+      });
+    }
+
+
     toastr.success('Game saved');
     this.context.router.push('/games');
 
@@ -121,7 +177,9 @@ function mapStateToProps(state, ownProps){
       "left" : "",
       "right" : ""
     },
-    "winner" : ""};
+    "winner" : "",
+    "winner_id": "",
+    "loser_id": ""};
 
   if (gameId && state.games.length > 0){
     game = getGameById(state.games, gameId);
@@ -136,7 +194,8 @@ function mapStateToProps(state, ownProps){
 
   return {
     game: game,
-    authors: authorsFormattedForDropdown
+    authors: authorsFormattedForDropdown,
+    users: state.users
   };
 }
 
@@ -149,3 +208,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageGamePage);
+
+
+function uidLookup(uid, users){
+  for(var x in users){
+    if (users[x].uid === uid){
+      return users[x];
+    }
+  }
+  return false;
+}
