@@ -1,18 +1,20 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 
-const GameListRow = ({game}) => {
+const GameListRow = ({game, users}) => {
   return (
 
     <tr>
       <td><Link to={'/game/' + game.id}>{(new Date (game.id)).toDateString()}</Link></td>
-      <td>{game.player_names.player_l_1} <br />
-        {game.player_names.player_l_2}</td>
+      <td>{uidToNameLookup(game.player_names.player_l_1, users)} <br />
+        {uidToNameLookup(game.player_names.player_l_2, users)}</td>
 
       <td>{game.scores.left}</td>
       <td>{game.scores.right}</td>
-      <td>{game.player_names.player_r_1}<br />{game.player_names.player_r_2}</td>
-      
+      <td>{uidToNameLookup(game.player_names.player_r_1, users)}<br />
+        {uidToNameLookup(game.player_names.player_r_2, users)}</td>
+
       <td>{game.winner} Side</td>
 
 
@@ -21,7 +23,35 @@ const GameListRow = ({game}) => {
 };
 
 GameListRow.propTypes = {
-  game: PropTypes.object.isRequired
+  game: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired
 };
 
-export default GameListRow;
+
+// one day inspect ownProps
+function mapStateToProps(state, ownProps){
+
+
+  const authorsFormattedForDropdown = state.users.map(author => {
+    return {
+      author
+
+    };
+  });
+
+  return {
+    authors: authorsFormattedForDropdown
+  };
+}
+
+function uidToNameLookup(uid, users){
+  //console.log(uid);
+  //console.log(users);
+  for(var x in users){
+    if (users[x].uid === uid){
+      return users[x].displayName;
+    }
+  }
+}
+
+export default connect(mapStateToProps)(GameListRow);

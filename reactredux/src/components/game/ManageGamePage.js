@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as gameActions from '../../actions/gameActions';
+import * as userActions from '../../actions/userActions';
 import GameForm from './GameForm';
 import toastr from 'toastr';
 
@@ -54,7 +55,7 @@ class ManageGamePage extends React.Component {
 
     //let scorecomp = 1;
     //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
-    
+
     //this.setState({game:game});
     this.props.actions.saveGame(this.state.game)
       .then(() => this.redirect())
@@ -67,9 +68,10 @@ class ManageGamePage extends React.Component {
 
   redirect() {
     this.setState({saving: false});
+    //this.props.useractions.saveUser()
     toastr.success('Game saved');
     this.context.router.push('/games');
-    
+
   }
 
   render(){
@@ -125,10 +127,10 @@ function mapStateToProps(state, ownProps){
     game = getGameById(state.games, gameId);
   }
 
-  const authorsFormattedForDropdown = state.authors.map(author => {
+  const authorsFormattedForDropdown = state.users.map(author => {
     return {
-      value: author.id,
-      text: author.firstName + ' ' + author.lastName
+      value: author.uid,
+      text: author.displayName
     };
   });
 
@@ -141,7 +143,8 @@ function mapStateToProps(state, ownProps){
 function mapDispatchToProps(dispatch) {
 
   return {
-    actions: bindActionCreators(gameActions, dispatch)
+    actions: bindActionCreators(gameActions, dispatch),
+    useractions: bindActionCreators(userActions, dispatch)
   };
 }
 

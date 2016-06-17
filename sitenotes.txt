@@ -10,4 +10,4 @@ create based on that for a selector for who you are playing against
 
 
 //where i store all current user data
-(JSON.parse(localStorage.getItem('user'))
+(JSON.parse(localStorage.getItem('user')))

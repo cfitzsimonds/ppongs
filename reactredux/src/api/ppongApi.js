@@ -23,12 +23,12 @@ class GameApi {
       for (var key in game.player_names){
         if(x%2 === 0 ) {
           if (game.player_names[key].length < 1) {
-            reject("Player name must be less than one")
+            reject("Must select a player in the first position for each side")
           }
         } else{
           if (game.game_type == 2){
             if (game.player_names[key].length < 1) {
-              reject("Player name must be less than one")
+              reject("Must select a player in the second position for each side ")
             }
           }
         }

@@ -4,7 +4,7 @@ import SelectInput from '../common/SelectInput';
 
 const GameForm = ({game, allPlayers, onSave, onChange, saving, errors}) => {
   return (
-    <form>
+    <div>
       <h1>Manage Game</h1>
 
       <SelectInput
@@ -15,33 +15,43 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors}) => {
         options={[{value: 1, text: "Singles"},{value: 2, text: "Doubles"}]}
         onChange={onChange} error={errors.game_type}/>
 
-      <TextInput
+      <SelectInput
         name="player_names.player_l_1"
         label="Left Player 1"
-        value={game.player_names.player_l_1}
+        value={game.player_names.player_l_1 }
+        defaultOption={"Select the first left player"}
+        options={allPlayers}
         onChange={onChange}
         error={errors.player_l_1}/>
 
-      <TextInput
+
+
+      <SelectInput
         name="player_names.player_l_2"
         label="Left Player 2"
         value={game.player_names.player_l_2}
         onChange={onChange}
+        defaultOption="Select the second left player"
+        options={allPlayers}
         error={errors.player_l_2}
         disabled={game.game_type -2}
       />
 
-      <TextInput
+      <SelectInput
         name="player_names.player_r_1"
         label="Right Player 1"
         value={game.player_names.player_r_1}
         onChange={onChange}
+        defaultOption="Select the first right player"
+        options={allPlayers}
         error={errors.player_r_1}/>
-      <TextInput
+      <SelectInput
         name="player_names.player_r_2"
         label="Right Player 2"
         value={game.player_names.player_r_2}
         onChange={onChange}
+        defaultOption="Select the second right player"
+        options={allPlayers}
         error={errors.player_r_2}
         disabled={game.game_type -2}
       />
@@ -68,7 +78,7 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors}) => {
         className="btn btn-primary"
         onClick={onSave}
       />
-    </form>
+    </div>
   );
 };
 

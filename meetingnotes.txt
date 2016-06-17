@@ -1,0 +1,73 @@
+currently jst iframe
+first time you see it, autodetects credentials, asks for registration
+
+can pick your level of experience
+
+have a release form
+
+league status
+
+
+currently administrator reciws requests to join and reviews what division - need manager to blanace the divisons
+
+databse stores name, id, email, division, and difficulty
+
+takes you right to standings and division
+
+pool play and playoff support
+
+currently only annually
+
+uses x by x graph
+
+
+shows how many have playeds
+
+can see other divisions
+
+
+select opponent you have anready played
+say who won what round
+
+
+old schol jsp
+
+
+each operation has a funciton
+
+can add handicaps
+
+kendo
+
+use a third party for other management of 
+
+challengo
+
+challonge
+
+for brackets
+
+currently just does pool play
+
+has built in rss 
+
+has links for training videos
+
+images and documents
+
+details, release form, rules
+
+trores signed release form at the top
+
+wpould rather have mvc
+
+would like scheduling
+
+but is n outlook now
+
+put out open invitatitons with no set opponent
+
+could even be a lync status
+
+they have 33 players
+

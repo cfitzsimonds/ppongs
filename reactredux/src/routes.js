@@ -21,6 +21,6 @@ export default (
     <Route path="game" component={ManageGamePage} />
     <Route path="game/:id" component={ManageGamePage} />
     <Route path="users" component={UserPage} />
-    <Route path="user" component={UserPage} />
+    <Route path="user/:id" component={UserPage} />
   </Route>
 );

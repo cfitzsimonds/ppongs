@@ -9,6 +9,7 @@ class GamesPage extends React.Component {
   constructor(props, context){
     super(props, context);
     this.redirectToAddGamePage = this.redirectToAddGamePage.bind(this);
+    this.render = this.render.bind(this);
   }
 
   gameRow(game, index){
@@ -28,8 +29,9 @@ class GamesPage extends React.Component {
                value="Add Game"
                className="btn btn-primary"
                onClick={this.redirectToAddGamePage}
+
         />
-        <GameList games={games}/>
+        <GameList games={games} users={this.props.users}/>
       </div>
     );
   }
@@ -37,12 +39,15 @@ class GamesPage extends React.Component {
 
 GamesPage.propTypes = {
   games: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps){
+  //console.log(state);
   return {
-    games: state.games
+    games: state.games,
+    users: state.users
   };
 }
 

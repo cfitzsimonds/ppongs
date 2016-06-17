@@ -3,7 +3,7 @@ import GameListRow from './GameListRow';
 
 // Need to come back and add columns/formatting
 
-const GameList = ({games}) => {
+const GameList = ({games, users}) => {
   return (
     <table className="table">
       <thead>
@@ -19,7 +19,7 @@ const GameList = ({games}) => {
       </thead>
       <tbody>
       {games.map(game =>
-        <GameListRow key={game.id} game={game}/>
+        <GameListRow key={game.id} game={game} users={users}/>
       )}
       </tbody>
     </table>
@@ -27,7 +27,8 @@ const GameList = ({games}) => {
 };
 
 GameList.propTypes = {
-  games: PropTypes.array.isRequired
+  games: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
 };
 
 export default GameList;
