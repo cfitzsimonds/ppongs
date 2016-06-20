@@ -62,7 +62,7 @@ class HomePage extends React.Component {
           </tbody>
         </table>
         <h3>Game History: </h3>
-        <GameList games={games} users={this.props.users}/>
+        <GameList games={games} users={this.props.users} uid={user.uid}/>
       </div>
     );
   }

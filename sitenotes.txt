@@ -24,3 +24,4 @@ add leagues and by default filtering by them
 make login bar part of header
 
 set up filtering for games
+- have filter by uid
