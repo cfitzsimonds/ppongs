@@ -19,3 +19,5 @@ create the user page, displaying basic information about them
 
 add leagues and by default filtering by them
 - go based off of current user (or selected league)
+
+make login bar part of header

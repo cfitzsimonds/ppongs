@@ -89,7 +89,7 @@ class UsersPage extends React.Component {
 
         // ...
       }.bind(this)).then(function (result) {
-
+        browserHistory.push('profile/'+firebase.auth().currentUser.uid);
       }.bind(this));
     } else {
       firebase.auth().signOut();
@@ -114,7 +114,7 @@ class UsersPage extends React.Component {
       />
     </div>);
     let loggedin = (<div>
-      <h1>HAHA</h1>
+      <h1>LoggedIn</h1>
       <input type="submit"
              value={"Log " + (this.state.currentUser)}
              className="btn btn-primary"

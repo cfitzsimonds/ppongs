@@ -7,7 +7,7 @@ import CoursesPage from './components/course/CoursesPage';
 import ManageCoursePage from './components/course/ManageCoursePage';
 import GamesPage from './components/game/GamesPage';
 import ManageGamePage from './components/game/ManageGamePage';
-import UsersPages from './components/users/UsersPage';
+import UserProfile from './components/users/UserProfile';
 import UserPage from './components/users/UserPage';
 
 export default (
@@ -21,6 +21,6 @@ export default (
     <Route path="game" component={ManageGamePage} />
     <Route path="game/:id" component={ManageGamePage} />
     <Route path="users" component={UserPage} />
-    <Route path="user/:id" component={UserPage} />
+    <Route path="profile/:id" component={UserProfile} />
   </Route>
 );

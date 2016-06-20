@@ -10,7 +10,7 @@ class HomePage extends React.Component {
 
     return (
       <div className="jumbotron">
-        <h1>PPong</h1>
+        <h1>USER</h1>
         <p>React, Redux, and React Router in ES6 based ping pong scoretracker</p>
         <Link to="about" className="btn btn-primary btn-lg">Learn More</Link>
       </div>
