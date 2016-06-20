@@ -102,6 +102,7 @@ class ManageGamePage extends React.Component {
 
     for (var i in thisgame.player_names){
       temp = uidLookup(thisgame.player_names[i], this.props.users);
+      console.log(i);
       if(temp == false){
         continue;
       }
@@ -109,7 +110,7 @@ class ManageGamePage extends React.Component {
       if(i.indexOf("2") > -1 && matchtype === "singles"){
         continue;
       }
-      if(i.indexOf("r") > -1 ){
+      if(i[7] === "r" ){
         temp.statistics.wins[matchtype] += rightwinner;
         temp.statistics.losses[matchtype] += leftwinner;
         temp.statistics.draws[matchtype] += draw;

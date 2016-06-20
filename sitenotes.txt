@@ -16,8 +16,11 @@ next on the list:
 
 create the user page, displaying basic information about them
 - can probably take a look at how games and classes are structured, make it like that but with more info
+-Got everything done except setting up filter
 
 add leagues and by default filtering by them
 - go based off of current user (or selected league)
 
 make login bar part of header
+
+set up filtering for games

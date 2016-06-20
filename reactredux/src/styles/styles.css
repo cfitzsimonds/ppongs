@@ -84,3 +84,13 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+
+#rcorners9 {
+  border-radius: 50%;
+  width: 200px;
+  height: 150px;
+}
+#centeredimage {
+  margin-left: auto; margin-right: auto;
+}

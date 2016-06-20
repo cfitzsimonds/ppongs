@@ -89,7 +89,7 @@ class UsersPage extends React.Component {
 
         // ...
       }.bind(this)).then(function (result) {
-        browserHistory.push('profile/'+firebase.auth().currentUser.uid);
+        //browserHistory.push('profile/'+firebase.auth().currentUser.uid);
       }.bind(this));
     } else {
       firebase.auth().signOut();
