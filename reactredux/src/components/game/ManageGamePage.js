@@ -208,7 +208,6 @@ function mapStateToProps(state, ownProps){
       leagues: author.leagues
     };
   });
-  console.log(user)
 
   return {
     game: game,

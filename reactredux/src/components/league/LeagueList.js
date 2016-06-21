@@ -3,15 +3,11 @@ import LeagueListRow from './LeagueListRow';
 
 const LeagueList = ({leagues}) => {
   return (
-    <table className="table">
+    <table className="leaguetable">
       <thead>
       <tr>
         <th>&nbsp;</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Category</th>
-        <th>Length</th>
-      </tr>
+        </tr>
       </thead>
       <tbody>
       {leagues.map(league =>

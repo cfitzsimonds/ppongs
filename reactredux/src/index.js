@@ -9,6 +9,7 @@ import {loadCourses} from './actions/courseActions';
 import {loadAuthors} from './actions/authorActions';
 import {loadGames} from './actions/gameActions';
 import {loadUsers} from './actions/userActions';
+import {loadLeagues} from './actions/leagueActions';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
@@ -19,6 +20,7 @@ store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
 store.dispatch(loadGames());
 store.dispatch(loadUsers());
+store.dispatch(loadLeagues());
 
 render(
   <Provider store={store}>

@@ -23,9 +23,9 @@ class LeaguesPage extends React.Component {
     const {leagues} = this.props;
     return (
       <div>
-        <h1>Leagues</h1>
+        <h1>My Leagues</h1>
         <input type="submit"
-               value="Add League"
+               value="Join League"
                className="btn btn-primary"
                onClick={this.redirectToAddLeaguePage}
         />

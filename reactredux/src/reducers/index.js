@@ -3,6 +3,7 @@ import courses from './courseReducer';
 import authors from './authorReducer';
 import games from './gameReducer';
 import users from './userReducer';
+import leagues from './leagueReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({

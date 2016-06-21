@@ -31,9 +31,9 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         value={game.player_names.player_l_1 }
         defaultOption={"Select the first left player"}
         options={allPlayers.filter(function(player){
-          for(var i in currentPlayer.leagues){
-            if (player.leagues.indexOf(currentPlayer.leagues[i]) > -1 ){
-              return true;
+          for ( var i in player.leagues){
+            if (game.league_name === player.leagues[i].value){
+            return true;
             }
           }
           return false;
@@ -49,7 +49,14 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         value={game.player_names.player_l_2}
         onChange={onChange}
         defaultOption="Select the second left player"
-        options={allPlayers}
+        options={allPlayers.filter(function(player){
+          for ( var i in player.leagues){
+            if (game.league_name === player.leagues[i].value){
+            return true;
+            }
+          }
+          return false;
+        })}
         error={errors.player_l_2}
         disabled={game.game_type -2}
       />
@@ -60,7 +67,14 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         value={game.player_names.player_r_1}
         onChange={onChange}
         defaultOption="Select the first right player"
-        options={allPlayers}
+        options={allPlayers.filter(function(player){
+          for ( var i in player.leagues){
+            if (game.league_name === player.leagues[i].value){
+            return true;
+            }
+          }
+          return false;
+        })}
         error={errors.player_r_1}/>
       <SelectInput
         name="player_names.player_r_2"
@@ -68,7 +82,14 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         value={game.player_names.player_r_2}
         onChange={onChange}
         defaultOption="Select the second right player"
-        options={allPlayers}
+        options={allPlayers.filter(function(player){
+          for ( var i in player.leagues){
+            if (game.league_name === player.leagues[i].value){
+            return true;
+            }
+          }
+          return false;
+        })}
         error={errors.player_r_2}
         disabled={game.game_type -2}
       />
@@ -109,3 +130,4 @@ GameForm.propTypes = {
 };
 
 export default GameForm;
+

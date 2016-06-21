@@ -67,6 +67,7 @@ class GameApi {
   }
 
   static getAllGames() {
+    console.log("called2");
     return new Promise((resolve,  reject) => {
       firebase.database().ref("games/").on('value', function (data) {
         //console.log(data.val());

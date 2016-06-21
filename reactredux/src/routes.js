@@ -9,6 +9,8 @@ import GamesPage from './components/game/GamesPage';
 import ManageGamePage from './components/game/ManageGamePage';
 import UserProfile from './components/users/UserProfile';
 import UserPage from './components/users/UserPage';
+import LeaguePage from './components/league/LeaguesPage'
+import JoinLeaguePage from './components/league/JoinLeague'
 
 export default (
   <Route path="/" component={App}>
@@ -22,5 +24,7 @@ export default (
     <Route path="game/:id" component={ManageGamePage} />
     <Route path="users" component={UserPage} />
     <Route path="profile/:id" component={UserProfile} />
+    <Route path="leagues" component={LeaguePage} />
+    <Route path="league" component={JoinLeaguePage} />
   </Route>
 );

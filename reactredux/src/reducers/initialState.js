@@ -3,6 +3,6 @@ export default {
   courses: [],
   games: [],
   users: [],
-  leagues,
+  leagues: [],
   ajaxCallsInProgress: 0
 };
