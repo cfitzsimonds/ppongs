@@ -2,7 +2,7 @@ import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const GameForm = ({game, allPlayers, onSave, onChange, saving, errors}) => {
+const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPlayer}) => {
   return (
     <div>
       <h1>Manage Game</h1>
@@ -20,7 +20,15 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors}) => {
         label="Left Player 1"
         value={game.player_names.player_l_1 }
         defaultOption={"Select the first left player"}
-        options={allPlayers}
+        options={allPlayers.filter(function(player){
+        console.log(currentPlayer)
+          for(var i in currentPlayer.leagues){
+            if (player.leagues.indexOf(currentPlayer.leagues[i]) > -1 ){
+              return true;
+            }
+          }
+          return false;
+        })}
         onChange={onChange}
         error={errors.player_l_1}/>
 

@@ -25,3 +25,8 @@ make login bar part of header
 
 set up filtering for games
 - have filter by uid
+
+who is the winner is wrong
+- was comparing strings not int values
+
+admin page

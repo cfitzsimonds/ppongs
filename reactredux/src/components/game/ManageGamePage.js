@@ -14,7 +14,8 @@ class ManageGamePage extends React.Component {
       //in use manage course form he recommends changing this
       game: Object.assign({}, this.props.game),
       errors: {},
-      saving: false
+      saving: false,
+      user: Object.assign({}, this.props.user)
     };
 
     this.updateGameState = this.updateGameState.bind(this);
@@ -38,6 +39,7 @@ class ManageGamePage extends React.Component {
     }else {
       game[field] = event.target.value;
     }
+    /*
     if ((this.state.game.scores.left === this.state.game.scores.right)) {
       game.winner = "Neither";
     } else {
@@ -47,7 +49,7 @@ class ManageGamePage extends React.Component {
         game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
       game.loser_id = (this.state.game.scores.left < this.state.game.scores.right) ?
       game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
-    }
+    }*/
 
 
     return this.setState({game: game});
@@ -55,13 +57,23 @@ class ManageGamePage extends React.Component {
 
   saveGame(event){
     event.preventDefault();
+    let game = this.state.game;
     this.setState({saving: true});
-
+    if ((game.scores.left === game.scores.right)) {
+      game.winner = "Neither";
+    } else {
+      game.winner = (parseInt(game.scores.left) > parseInt(game.scores.right)) ?
+        "Left" : "Right";
+      game.winner_id = (parseInt(game.scores.left) > parseInt(game.scores.right)) ?
+      game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
+      game.loser_id = (parseInt(game.scores.left) < parseInt(game.scores.right)) ?
+      game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
+    }
     //let scorecomp = 1;
     //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
 
     //this.setState({game:game});
-    this.props.actions.saveGame(this.state.game)
+    this.props.actions.saveGame(game)
       .then(() => this.redirect())
       .catch(error => {
         toastr.error(error);
@@ -102,7 +114,6 @@ class ManageGamePage extends React.Component {
 
     for (var i in thisgame.player_names){
       temp = uidLookup(thisgame.player_names[i], this.props.users);
-      console.log(i);
       if(temp == false){
         continue;
       }
@@ -132,6 +143,7 @@ class ManageGamePage extends React.Component {
   }
 
   render(){
+    console.log(this.state.user)
     return (
       <GameForm
         allPlayers={this.props.authors}
@@ -140,6 +152,7 @@ class ManageGamePage extends React.Component {
         game={this.state.game}
         errors={this.state.errors}
         saving={this.state.saving}
+        currentPlayer={this.state.user}
       />
     );
   }
@@ -148,7 +161,8 @@ class ManageGamePage extends React.Component {
 ManageGamePage.propTypes = {
   game: PropTypes.object.isRequired,
   authors: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  user: PropTypes.object
 };
 
 ManageGamePage.contextTypes = {
@@ -164,6 +178,7 @@ function getGameById(games, id) {
 // one day inspect ownProps
 function mapStateToProps(state, ownProps){
   const gameId = ownProps.params.id;
+  let user = (JSON.parse(localStorage.getItem('user')));
   let game ={
     "game_type" : "",
     "id" : "",
@@ -189,14 +204,17 @@ function mapStateToProps(state, ownProps){
   const authorsFormattedForDropdown = state.users.map(author => {
     return {
       value: author.uid,
-      text: author.displayName
+      text: author.displayName,
+      leagues: author.leagues
     };
   });
+  console.log(user)
 
   return {
     game: game,
     authors: authorsFormattedForDropdown,
-    users: state.users
+    users: state.users,
+    user: user
   };
 }
 
@@ -209,7 +227,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageGamePage);
-
+function getUserById(users, id) {
+  const user = users.filter(user => user.uid == id);
+  if (user.length) return user[0];
+  return null;
+}
 
 function uidLookup(uid, users){
   for(var x in users){

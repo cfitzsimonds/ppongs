@@ -46,10 +46,10 @@ class UserApi {
               doubles: 0
             }
           };
-          user.leagues = ['all'];
+          user.leagues = ['some'];
 
           firebase.database().ref("users/").push(user);
-          localStorage.setItem('user', user);
+          localStorage.setItem('user', JSON.stringify(user));
         }
 
 
