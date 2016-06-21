@@ -17,9 +17,12 @@ next on the list:
 create the user page, displaying basic information about them
 - can probably take a look at how games and classes are structured, make it like that but with more info
 -Got everything done except setting up filter
+-Now have automatic filter
 
 add leagues and by default filtering by them
 - go based off of current user (or selected league)
+- only allows users to record games with players in their league (should change to making a league selector only allows players in that league)
+- need to add so that when a user is added to a league it records their name
 
 make login bar part of header
 

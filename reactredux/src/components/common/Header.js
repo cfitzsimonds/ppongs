@@ -3,7 +3,7 @@ import { Link, IndexLink } from 'react-router';
 import LoadingDots from './LoadingDots';
 
 const Header = ({loading}) => {
-
+  //firebase.database().ref("leagues/").push({name:"Rightpoint Detroit", uid: "1466513558321", admin:"A5it5HJdRtXiBM3dKyRAjUME5wz2", pin:"1234", members:["A5it5HJdRtXiBM3dKyRAjUME5wz2", "4Q7lBJlRX5M5sg3wCXTPdUTpDwy1"]});
   return (
     <nav>
       <IndexLink to="/" activeClassName="active">Home</IndexLink>

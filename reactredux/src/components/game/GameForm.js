@@ -3,6 +3,7 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
 const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPlayer}) => {
+  console.log(currentPlayer.leagues)
   return (
     <div>
       <h1>Manage Game</h1>
@@ -16,12 +17,20 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         onChange={onChange} error={errors.game_type}/>
 
       <SelectInput
+        name="league_name"
+        label="League"
+        value={game.league_name }
+        defaultOption={"Select league this match is in"}
+        options={currentPlayer.leagues}
+        onChange={onChange}
+        error={errors.player_l_1}/>
+
+      <SelectInput
         name="player_names.player_l_1"
         label="Left Player 1"
         value={game.player_names.player_l_1 }
         defaultOption={"Select the first left player"}
         options={allPlayers.filter(function(player){
-        console.log(currentPlayer)
           for(var i in currentPlayer.leagues){
             if (player.leagues.indexOf(currentPlayer.leagues[i]) > -1 ){
               return true;

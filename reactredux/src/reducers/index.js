@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
   games,
   authors,
   users,
+  leagues,
   ajaxCallsInProgress
 });
 
