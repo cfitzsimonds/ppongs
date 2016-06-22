@@ -28,8 +28,30 @@ make login bar part of header
 
 set up filtering for games
 - have filter by uid
+- need by league - and have support for it on the main page
 
 who is the winner is wrong
 - was comparing strings not int values
 
+
+---------------------------------------------
 admin page
+- add a league
+- remove a player from a league
+- delete a user
+- delete a game
+
+add a me page in the header to view user profile
+
+need head to head history
+- when you view someone's page, add a toggle for head to head
+
+sort by league on games page
+- need to add list filter for uid
+- done
+
+need a refresh to keep current user updated
+-? maybe lookup in header
+
+
+Long term, possibly restructure, store game history in leagues not in its own tabel

@@ -8,6 +8,10 @@ import {browserHistory} from 'react-router';
 class GamesPage extends React.Component {
   constructor(props, context){
     super(props, context);
+    this.state = {
+      user : this.props.user
+    };
+
     this.redirectToAddGamePage = this.redirectToAddGamePage.bind(this);
     this.render = this.render.bind(this);
   }
@@ -21,7 +25,10 @@ class GamesPage extends React.Component {
   }
 
   render() {
+
     const {games} = this.props;
+    let user = this.props.user|| {leagues: []};
+    let users = this.props.users ;
     return (
       <div>
         <h1>Games</h1>
@@ -31,7 +38,12 @@ class GamesPage extends React.Component {
                onClick={this.redirectToAddGamePage}
 
         />
-        <GameList games={games} users={this.props.users}/>
+        {user.leagues.map(function(el){
+          console.log(el)
+          return (<div key={el.value}><h3>{el.text}</h3>
+          <GameList  games={games} users={users} league={el.value}/></div>)
+        })}
+
       </div>
     );
   }
@@ -40,14 +52,18 @@ class GamesPage extends React.Component {
 GamesPage.propTypes = {
   games: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps){
   //console.log(state);
+  let user = findUser(state.users, (JSON.parse(localStorage.getItem('user'))).uid);
+
   return {
     games: state.games,
-    users: state.users
+    users: state.users,
+    user: user
   };
 }
 
@@ -60,3 +76,10 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamesPage);
 // can define a mapDispatchToProps but is automatically replaced by dispatch atm
+function findUser(userlist, id){
+  for (var i in userlist){
+    if (userlist[i].uid === id){
+      return userlist[i]
+    }
+  }
+}
