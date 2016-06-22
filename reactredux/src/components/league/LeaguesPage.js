@@ -20,6 +20,10 @@ class LeaguesPage extends React.Component {
   }
 
   render() {
+    /*if((JSON.parse(localStorage.getItem('user'))).uid === ''){
+      browserHistory.push('/users');
+      return null;
+    }*/
     let user = getUserById(this.props.users, (JSON.parse(localStorage.getItem('user'))).uid);
     const {leagues} = this.props;
     return (
@@ -106,7 +110,31 @@ function mapDispatchToProps(dispatch) {
 function getUserById(users, id) {
   const user = users.filter(user => user.uid == id);
   if (user.length) return user[0];
-  return null;
+  return {
+    "displayName" : "",
+    "email" : "",
+    "leagues" : [],
+    "proPic" : "",
+    "statistics" : {
+      "draws" : {
+        "doubles" : 0,
+        "singles" : 0
+      },
+      "games_played" : {
+        "doubles" : 0,
+        "singles" : 0
+      },
+      "losses" : {
+        "doubles" : 0,
+        "singles" : 0
+      },
+      "wins" : {
+        "doubles" : 0,
+        "singles" : 0
+      }
+    },
+    "uid" : ""
+  };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LeaguesPage);
 // can define a mapDispatchToProps but is automatically replaced by dispatch atm

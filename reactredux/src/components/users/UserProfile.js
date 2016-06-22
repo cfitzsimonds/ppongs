@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import GameList from '../game/GameList';
-
+import {browserHistory} from 'react-router';
 
 class HomePage extends React.Component {
   constructor(props, context){
@@ -31,6 +31,10 @@ class HomePage extends React.Component {
     this.setState({checked: e.target.checked});
   };
   render() {
+    if((JSON.parse(localStorage.getItem('user'))).uid === ''){
+      browserHistory.push('/users');
+
+    }
     console.log(JSON.parse(localStorage.getItem('user')));
     let user =  this.props.user;
     let games = this.props.games;

@@ -25,7 +25,10 @@ class GamesPage extends React.Component {
   }
 
   render() {
+    if((JSON.parse(localStorage.getItem('user'))).uid === ''){
+      //browserHistory.push('/users');
 
+    }
     const {games} = this.props;
     let user = this.props.user|| {leagues: []};
     let users = this.props.users ;
