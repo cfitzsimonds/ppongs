@@ -76,6 +76,31 @@ class UsersPage extends React.Component {
 
   redirectToAddUserPage(){
     //browserHistory.push('/user');
+    localStorage.setItem('user', JSON.stringify({
+      "displayName" : "",
+      "email" : "",
+      "leagues" : [],
+      "proPic" : "",
+      "statistics" : {
+        "draws" : {
+          "doubles" : 0,
+          "singles" : 0
+        },
+        "games_played" : {
+          "doubles" : 0,
+          "singles" : 0
+        },
+        "losses" : {
+          "doubles" : 0,
+          "singles" : 0
+        },
+        "wins" : {
+          "doubles" : 0,
+          "singles" : 0
+        }
+      },
+      "uid" : ""
+    }));
     if (!firebase.auth().currentUser) {
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then(function (result) {
@@ -86,11 +111,13 @@ class UsersPage extends React.Component {
         this.convertToStoreUser(result.user);
         this.saveUser();
         this.setState({currentUser: "out"});
+        this.forceUpdate();
+        console.log("wont be where")
+        browserHistory.push('/games');
+        browserHistory.go(-11);
 
-        // ...
-      }.bind(this)).then(function (result) {
-        //browserHistory.push('profile/'+firebase.auth().currentUser.uid);
-      }.bind(this));
+      }.bind(this))
+
     } else {
       firebase.auth().signOut();
       localStorage.setItem('userid', "not here");
@@ -98,12 +125,15 @@ class UsersPage extends React.Component {
       this.setState({currentUser : "in"});
       //console.log("out")
       this.forceUpdate();
+      browserHistory.push('/games');
     }
+    //browserHistory.push('/games');
   }
 
   render() {
     //this.state.currentUser = (firebase.auth().currentUser) ? "out": "in";
     const {users} = this.props;
+
     //this.checkAuth();
     let loggedout = (<div>
       <h1>Users</h1>
@@ -114,7 +144,7 @@ class UsersPage extends React.Component {
       />
     </div>);
     let loggedin = (<div>
-      <h1>LoggedIn</h1>
+      <h1>Login successful! </h1>
       <input type="submit"
              value={"Log " + (this.state.currentUser)}
              className="btn btn-primary"

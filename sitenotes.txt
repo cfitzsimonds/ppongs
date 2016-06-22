@@ -33,7 +33,8 @@ set up filtering for games
 who is the winner is wrong
 - was comparing strings not int values
 
-
+        <input type="checkbox" name="h2h" value={this.state.checked} checked={this.state.checked} onChange={this.handleClick}/> Show only matches against you?<br />
+	tried this for head to head, no success
 ---------------------------------------------
 admin page
 - add a league
@@ -52,6 +53,7 @@ sort by league on games page
 
 need a refresh to keep current user updated
 -? maybe lookup in header
+- Seems to be unnecessary as long as site uses user lookup instead of actually pulling data from the storage
 
 
 Long term, possibly restructure, store game history in leagues not in its own tabel

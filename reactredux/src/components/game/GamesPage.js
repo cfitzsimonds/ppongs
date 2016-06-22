@@ -39,7 +39,6 @@ class GamesPage extends React.Component {
 
         />
         {user.leagues.map(function(el){
-          console.log(el)
           return (<div key={el.value}><h3>{el.text}</h3>
           <GameList  games={games} users={users} league={el.value}/></div>)
         })}
@@ -53,7 +52,7 @@ GamesPage.propTypes = {
   games: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps){

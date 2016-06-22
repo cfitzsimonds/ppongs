@@ -8,13 +8,14 @@ import GameList from '../game/GameList';
 class HomePage extends React.Component {
   constructor(props, context){
     super(props, context);
-
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       //in use manage course form he recommends changing this
       user: Object.assign({}, this.props.user),
       games: Object.assign({}, this.props.games),
       errors: {},
-      saving: false
+      saving: false,
+      checked: true
     };
 
 
@@ -26,10 +27,14 @@ class HomePage extends React.Component {
       this.setState({user: Object.assign({}, nextProps.user)});
     }
   }
+  handleClick (e) {
+    this.setState({checked: e.target.checked});
+  };
   render() {
-    //console.log(JSON.parse(localStorage.getItem('user')));
+    console.log(JSON.parse(localStorage.getItem('user')));
     let user =  this.props.user;
     let games = this.props.games;
+    var checked;
 
     return (
       <div >
@@ -62,7 +67,7 @@ class HomePage extends React.Component {
           </tbody>
         </table>
         <h3>Game History: </h3>
-        <GameList games={games} users={this.props.users} uid={user.uid}/>
+        <GameList games={games} users={this.props.users} uid={user.uid} uid2={(1)? (JSON.parse(localStorage.getItem('user'))).uid : ''}/>
       </div>
     );
   }

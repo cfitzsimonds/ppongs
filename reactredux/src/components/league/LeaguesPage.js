@@ -20,16 +20,27 @@ class LeaguesPage extends React.Component {
   }
 
   render() {
+    let user = getUserById(this.props.users, (JSON.parse(localStorage.getItem('user'))).uid);
     const {leagues} = this.props;
     return (
       <div>
         <h1>My Leagues</h1>
+
+        <LeagueList leagues={leagues.filter(function(el){
+        console.log(user)
+          for (var i in user.leagues){
+            if (user.leagues[i].value === el.uid){
+              return true;
+            }
+
+          }
+          return false;
+        })}/> <br />
         <input type="submit"
                value="Join League"
                className="btn btn-primary"
                onClick={this.redirectToAddLeaguePage}
         />
-        <LeagueList leagues={leagues}/>
       </div>
     );
   }
@@ -40,17 +51,62 @@ LeaguesPage.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
+
 function mapStateToProps(state, ownProps){
+  const userId = ownProps.params.id;
+  let user = {
+    "displayName" : "",
+    "email" : "",
+    "leagues" : [ "all" ],
+    "proPic" : "",
+    "statistics" : {
+      "draws" : {
+        "doubles" : 0,
+        "singles" : 0
+      },
+      "games_played" : {
+        "doubles" : 0,
+        "singles" : 0
+      },
+      "losses" : {
+        "doubles" : 0,
+        "singles" : 0
+      },
+      "wins" : {
+        "doubles" : 0,
+        "singles" : 0
+      }
+    },
+    "uid" : ""
+  };
+
+  if (userId && state.users.length > 0){
+    user = getUserById(state.users, userId);
+  }
+
+  /*const authorsFormattedForDropdown = state.users.map(user => {
+   return {
+   value: user.uid,
+   text: author.firstName + ' ' + author.lastName
+   };
+   });*/
+
   return {
+    user: user,
+    users: state.users,
+    games: state.games,
     leagues: state.leagues
   };
 }
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(leagueActions, dispatch)
   };
 }
-
+function getUserById(users, id) {
+  const user = users.filter(user => user.uid == id);
+  if (user.length) return user[0];
+  return null;
+}
 export default connect(mapStateToProps, mapDispatchToProps)(LeaguesPage);
 // can define a mapDispatchToProps but is automatically replaced by dispatch atm

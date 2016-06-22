@@ -18,7 +18,9 @@ class GameApi {
       if(!(game.game_type>0)){
         reject("Must select a valid game type")
       }
-
+      if(!game.league_name){
+        reject("Must select a league")
+      }
       var x = 0;
       for (var key in game.player_names){
         if(x%2 === 0 ) {
