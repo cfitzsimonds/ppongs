@@ -6,7 +6,7 @@ const JoinLeagueForm = ({allLeagues,onChange,onSave,league,errors,saving}) => {
   //console.log(allLeagues)
   return (
     <div>
-      <h1>Add a league</h1>
+      <h1>Join a league</h1>
 
       <SelectInput
         name="uid"

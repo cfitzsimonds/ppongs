@@ -48,7 +48,7 @@ class JoinLeaguePage extends React.Component {
     if(user.leagues.map(function(element){
         return (element.value === toadd.value);
       }).reduce(function(prev, curr){
-        return (prev && curr);
+        return (prev || curr);
       })
     ){
       toastr.error("Already in this league");
@@ -60,8 +60,9 @@ class JoinLeaguePage extends React.Component {
     this.setState({saving: true});
     //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
     if(this.state.league.pin === getLeagueById(this.props.leagues, this.state.league.uid).pin){
+      user.leagues.push(toadd);
       this.props.useractions.saveUser(user).then(() => {
-        user.leagues.push(toadd);
+
         this.redirect()}).catch(error => {
         toastr.error(error); this.setState({saving: false});
       })
