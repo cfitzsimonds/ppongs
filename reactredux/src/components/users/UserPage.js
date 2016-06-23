@@ -22,9 +22,13 @@ class UsersPage extends React.Component {
   }
 
   componentDidMount(){
+    //console.log((/[^a-zA-Z0-9]/.test(localStorage.getItem('userid'))))
     if(!(/[^a-zA-Z0-9]/.test(localStorage.getItem('userid')))){
       this.setState({currentUser: "out"});
     } else {
+      this.setState({currentUser: "in"});
+    }
+    if ((localStorage.getItem('userid'))== null){
       this.setState({currentUser: "in"});
     }
 };
@@ -151,7 +155,7 @@ class UsersPage extends React.Component {
              onClick={this.redirectToAddUserPage}
       />
     </div>);
-    return ((!(/[^a-zA-Z0-9]/.test(localStorage.getItem('userid'))))? loggedin : (loggedout)
+    return (((!(/[^a-zA-Z0-9]/.test(localStorage.getItem('userid'))))&&!((localStorage.getItem('userid'))=== null))? loggedin : (loggedout)
 
     );
   }

@@ -36,7 +36,7 @@ const JoinLeagueForm = ({allLeagues,onChange,onSave,league,errors,saving}) => {
       <input
         type="submit"
         disabled={saving}
-        value={saving ? 'Adding...' : 'Add game'}
+        value={saving ? 'Adding...' : 'Join league'}
         className="btn btn-primary"
         onClick={onSave}
       />

@@ -3,7 +3,7 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
 const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPlayer}) => {
-  console.log(currentPlayer.leagues)
+//  console.log(currentPlayer.leagues)
   return (
     <div>
       <h1>Manage Game</h1>

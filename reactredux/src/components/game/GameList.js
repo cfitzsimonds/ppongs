@@ -3,7 +3,7 @@ import GameListRow from './GameListRow';
 
 // Need to come back and add columns/formatting
 
-const GameList = ({games, users, uid, league, uid2}) => {
+const GameList = ({games, users, uid, league, uid2, uid3, uid4, uids}) => {
   if (uid){
     games = games.filter(function(game){
       for (var i in game.player_names){
@@ -19,6 +19,39 @@ const GameList = ({games, users, uid, league, uid2}) => {
     games = games.filter(function(game){
       for (var i in game.player_names){
         if( game.player_names[i] === uid2){
+          return true;
+        }
+      }
+
+      return false;
+    })
+  }
+  if (uid3){
+    games = games.filter(function(game){
+      for (var i in game.player_names){
+        if( game.player_names[i] === uid3){
+          return true;
+        }
+      }
+
+      return false;
+    });
+  }
+  if(uid4){
+    games = games.filter(function(game){
+      for (var i in game.player_names){
+        if( game.player_names[i] === uid4){
+          return true;
+        }
+      }
+
+      return false;
+    })
+  }
+  for ( var j in uids){
+    games = games.filter(function(game){
+      for (var i in game.player_names){
+        if( game.player_names[i] === uids[j]){
           return true;
         }
       }
@@ -62,6 +95,9 @@ GameList.propTypes = {
   users: PropTypes.array.isRequired,
   uid: PropTypes.string,
   uid2: PropTypes.string,
+  uid3: PropTypes.string,
+  uid4: PropTypes.string,
+  uids: PropTypes.array,
   league: PropTypes.string
 };
 

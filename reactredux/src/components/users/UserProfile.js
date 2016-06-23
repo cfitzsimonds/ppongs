@@ -44,6 +44,7 @@ class HomePage extends React.Component {
       <div >
         <h1 id="centeredimage">{user.displayName}<br />
           <img src={user.proPic} alt={user.displayName} id="rcorners9"/></h1>
+        <h2>Elo: {user.elo}</h2>
         <h3>Statistics:</h3>
         <table className="table">
           <thead>

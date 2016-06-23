@@ -81,11 +81,41 @@ class ManageGamePage extends React.Component {
       });
 
   }
-
+  getElo(user){
+    return (user.elo || 0);
+  }
   redirect() {
     this.setState({saving: false});
     let thisgame = this.state.game;
     let temp = uidLookup(thisgame.player_names.player_l_1, this.props.users);
+
+
+    // Elo stuff
+    let l_elos = (this.props.users).filter(function (el) {
+      for (var i in thisgame.player_names){
+        if (thisgame.player_names[i] === el.uid && i[7] === "l"){
+          return true;
+        }
+      }
+      return false;
+    }.bind(this)).map(this.getElo);
+    let r_elos = (this.props.users).filter(function (el) {
+      for (var i in thisgame.player_names){
+        if (thisgame.player_names[i] === el.uid && i[7] === "r"){
+          return true;
+        }
+      }
+      return false;
+    }.bind(this)).map(this.getElo);
+    let r = [Math.pow(10,(l_elos.reduce(function(a, b){
+      return (a + b )/((b>0)? 2:1)
+    }))/400), Math.pow(10,(r_elos.reduce(function(a, b){
+        return (a + b )/((b>0)? 2:1)
+      }))/400)];
+
+    let e = [r[0]/(r[1]+r[0]),r[1]/(r[1]+r[0]) ]
+    let k = 32;
+    let s = [];
     let leftwinner = 1;
     let rightwinner = 1;
     let draw = 1;
@@ -102,15 +132,20 @@ class ManageGamePage extends React.Component {
       leftwinner = 0;
       rightwinner = 1;
       draw = 0;
+      s = [0, 1];
     } else if (thisgame.winner === "Left"){
       leftwinner = 1;
       rightwinner = 0;
       draw = 0;
+      s = [1, 0];
     } else {
       leftwinner = 0;
       rightwinner = 0;
       draw = 1;
+      s = [.5, .5];
     }
+
+
 
     for (var i in thisgame.player_names){
       temp = uidLookup(thisgame.player_names[i], this.props.users);
@@ -125,10 +160,12 @@ class ManageGamePage extends React.Component {
         temp.statistics.wins[matchtype] += rightwinner;
         temp.statistics.losses[matchtype] += leftwinner;
         temp.statistics.draws[matchtype] += draw;
+        temp.elo += k * (s[1]- e[1]);
       } else {
         temp.statistics.wins[matchtype] += leftwinner;
         temp.statistics.losses[matchtype] += rightwinner;
         temp.statistics.draws[matchtype] += draw;
+        temp.elo += k * (s[0]- e[0]);
       }
       this.props.useractions.saveUser(temp).catch(error => {
         toastr.error(error);

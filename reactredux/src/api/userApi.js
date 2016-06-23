@@ -46,7 +46,8 @@ class UserApi {
               doubles: 0
             }
           };
-          user.leagues = [{text:"Rightpoint Detroit",value: "1466513558321" }];
+          user.leagues = [{text:"Rightpoint Detroit",value: "1466513558321" }],
+          user.elo = 1500;
 
           firebase.database().ref("users/").push(user);
           localStorage.setItem('user', JSON.stringify(user));
