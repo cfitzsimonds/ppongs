@@ -58,6 +58,9 @@ rating system
 
 add a points in league and ranking system to each player
 
+hosted on firebase
+
+
 
 ---------------------------------------------
 admin page
