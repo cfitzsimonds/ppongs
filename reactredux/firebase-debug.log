@@ -1,0 +1,20 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\rmichalec\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init
+[debug] CLI Version:  3.0.3
+[debug] Platform:     win32
+[debug] Node Version: v4.4.5
+[debug] Time:         Fri Jun 24 2016 14:20:10 GMT-0400 (Eastern Daylight Time)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\rmichalec\Documents\GitHub\ppongs\reactredux
+

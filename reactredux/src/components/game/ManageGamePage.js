@@ -152,7 +152,10 @@ class ManageGamePage extends React.Component {
       if(temp == false){
         continue;
       }
+
       temp.statistics.games_played[matchtype] += 1;
+      temp.league_stats[thisgame.league_name].games_played += 1;
+
       if(i.indexOf("2") > -1 && matchtype === "singles"){
         continue;
       }
@@ -160,12 +163,18 @@ class ManageGamePage extends React.Component {
         temp.statistics.wins[matchtype] += rightwinner;
         temp.statistics.losses[matchtype] += leftwinner;
         temp.statistics.draws[matchtype] += draw;
-        temp.elo += k * (s[1]- e[1]);
+        temp.league_stats[thisgame.league_name].wins += rightwinner;
+        temp.league_stats[thisgame.league_name].losses += leftwinner;
+        temp.league_stats[thisgame.league_name].draws += draw;
+        temp.elo += Math.round(k * (s[1]- e[1]));
       } else {
         temp.statistics.wins[matchtype] += leftwinner;
         temp.statistics.losses[matchtype] += rightwinner;
         temp.statistics.draws[matchtype] += draw;
-        temp.elo += k * (s[0]- e[0]);
+        temp.league_stats[thisgame.league_name].wins += leftwinner;
+        temp.league_stats[thisgame.league_name].losses += rightwinner;
+        temp.league_stats[thisgame.league_name].draws += draw;
+        temp.elo += Math.round(k * (s[0]- e[0]));
       }
       this.props.useractions.saveUser(temp).catch(error => {
         toastr.error(error);

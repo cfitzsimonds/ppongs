@@ -61,6 +61,12 @@ class JoinLeaguePage extends React.Component {
     //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
     if(this.state.league.pin === getLeagueById(this.props.leagues, this.state.league.uid).pin){
       user.leagues.push(toadd);
+      user.league_stats[this.state.league.uid] = {
+        wins: 0,
+        losses: 0,
+        draws: 0,
+        games_played: 0
+      };
       this.props.useractions.saveUser(user).then(() => {
 
         this.redirect()}).catch(error => {

@@ -5,7 +5,34 @@ import {browserHistory} from 'react-router';
 
 const Header = ({loading}) => {
   //firebase.database().ref("leagues/").push({name:"test", uid: "146651333333", admin:"A5it5HJdRtXiBM3dKyRAjUME5wz2", pin:"1234", members:["A5it5HJdRtXiBM3dKyRAjUME5wz2", "4Q7lBJlRX5M5sg3wCXTPdUTpDwy1"]});
-  //console.log((JSON.parse(localStorage.getItem('user'))))
+  if(!(JSON.parse(localStorage.getItem('user')))){
+    localStorage.setItem('user', JSON.stringify({
+      "displayName" : "",
+      "email" : "",
+      "leagues" : [],
+      "proPic" : "",
+      "statistics" : {
+        "draws" : {
+          "doubles" : 0,
+          "singles" : 0
+        },
+        "games_played" : {
+          "doubles" : 0,
+          "singles" : 0
+        },
+        "losses" : {
+          "doubles" : 0,
+          "singles" : 0
+        },
+        "wins" : {
+          "doubles" : 0,
+          "singles" : 0
+        }
+      },
+      "uid" : "",
+      "elo" : 0
+    }));
+  }
 
   return (
     <nav>
@@ -18,6 +45,8 @@ const Header = ({loading}) => {
       <Link to="/users" activeClassName="active">Users</Link>
       {" | "}
       <Link to="/leagues" activeClassName="active">Leagues</Link>
+      {" | "}
+      <Link to="/h2h" activeClassName="active">HeadToHead</Link>
       {" | "}
       {
         ((JSON.parse(localStorage.getItem('user'))))?(<Link to={((JSON.parse(localStorage.getItem('user'))).uid)?

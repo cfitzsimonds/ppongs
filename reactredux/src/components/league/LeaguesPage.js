@@ -31,7 +31,6 @@ class LeaguesPage extends React.Component {
         <h1>My Leagues</h1>
 
         <LeagueList leagues={leagues.filter(function(el){
-        console.log(user)
           for (var i in user.leagues){
             if (user.leagues[i].value === el.uid){
               return true;

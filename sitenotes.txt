@@ -51,6 +51,14 @@ need head to head history
 - when you view someone's page, add a toggle for head to head
 - maybe have a page just for comparing records
 
+rating system
+- works but maybe display members of a league on the league page
+- maybe add list of games played to the user on every game played  
+
+
+add a points in league and ranking system to each player
+
+
 ---------------------------------------------
 admin page
 - add a league
@@ -60,18 +68,14 @@ admin page
 
 
 
--add more stat tracking - average score, etc
+add more stat tracking - average score, etc, breakdown by league, etc
 
--change winner display
+change winner display
 
--prompt players involved in game to validate
+prompt players involved in game to validate
 
--rating system
-
-Long term, possibly restructure, store game history in leagues not in its own tabel
-
-
-
+Long term, possibly restructure, store game history in leagues not in its own tabel, 
+-push game id to each league (works right now because of cross referencing but is slightly clunky/innefficient)
 
 
 

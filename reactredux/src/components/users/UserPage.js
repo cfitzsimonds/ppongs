@@ -103,7 +103,8 @@ class UsersPage extends React.Component {
           "singles" : 0
         }
       },
-      "uid" : ""
+      "uid" : "",
+      "elo" : 0
     }));
     if (!firebase.auth().currentUser) {
       var provider = new firebase.auth.GoogleAuthProvider();

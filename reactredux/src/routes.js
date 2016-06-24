@@ -12,6 +12,7 @@ import UserPage from './components/users/UserPage';
 import LeaguePage from './components/league/LeaguesPage'
 import JoinLeaguePage from './components/league/JoinLeague'
 import HeadToHeadPage from './components/h2h/HeadToHead'
+import LeagueDisplay from './components/league/LeagueDisplay';
 
 export default (
   <Route path="/" component={App}>
@@ -27,6 +28,7 @@ export default (
     <Route path="profile/:id" component={UserProfile} />
     <Route path="leagues" component={LeaguePage} />
     <Route path="league" component={JoinLeaguePage} />
+    <Route path="league/:id" component={LeagueDisplay} />
     <Route path="h2h" component={HeadToHeadPage} />
   </Route>
 );
