@@ -29,7 +29,6 @@ class LeaguesPage extends React.Component {
     }*/
     let user = getUserById(this.props.users, (JSON.parse(localStorage.getItem('user'))).uid);
     const {leagues} = this.props;
-    console.log(leagues)
     return (
       <div>
         <h1>My Leagues</h1>
@@ -48,6 +47,7 @@ class LeaguesPage extends React.Component {
                className="btn btn-primary"
                onClick={this.redirectToAddLeaguePage}
         />
+        &nbsp;
         <input type="submit"
                value="Create a League"
                className="btn btn-primary"

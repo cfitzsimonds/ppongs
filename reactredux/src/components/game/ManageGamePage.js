@@ -89,7 +89,8 @@ class ManageGamePage extends React.Component {
     let thisgame = this.state.game;
     let temp = uidLookup(thisgame.player_names.player_l_1, this.props.users);
 
-
+    let x = emailjs.send("default_service","template_qdW3Lfz6",{recipient: temp.email, to_name: temp.displayName, secret: "5"});
+    /// does in fact return a promise.  Considering using a prompt to send this to everyone, then making them all add a number up or something
     // Elo stuff
     let l_elos = (this.props.users).filter(function (el) {
       for (var i in thisgame.player_names){
@@ -190,7 +191,6 @@ class ManageGamePage extends React.Component {
   }
 
   render(){
-    console.log(this.state.user)
     return (
       <GameForm
         allPlayers={this.props.authors}

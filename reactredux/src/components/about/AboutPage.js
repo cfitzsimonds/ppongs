@@ -5,8 +5,8 @@ class AboutPage extends React.Component {
     return (
       <div>
         <h1>About</h1>
-        <p>Instructions:</p>
-        <h4>If not logged in, click either login or users <br />
+        <h4>Instructions:</h4>
+        <p>If not logged in, click either login or users <br />
             If this is your first time, click on leagues then select your league and enter your league's pin <br />
             To view the game history of all of your leagues, press them games tab <br />
             To view your own statistics and game history, click on My Profile <br />
@@ -17,7 +17,7 @@ class AboutPage extends React.Component {
             see their profile page.  <br />
             To view the history between any two players have leagues in common with you, click HeadToHead, and select the
             names of the players you would like to see.
-        </h4>
+        </p>
       </div>
     );
   }

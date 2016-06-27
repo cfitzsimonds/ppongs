@@ -35,7 +35,6 @@ class HomePage extends React.Component {
       browserHistory.push('/users');
 
     }
-    console.log(JSON.parse(localStorage.getItem('user')));
     let user =  this.props.user;
     let games = this.props.games;
     var checked;

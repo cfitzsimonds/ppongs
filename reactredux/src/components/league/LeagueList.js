@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import LeagueListRow from './LeagueListRow';
 
 const LeagueList = ({leagues}) => {
-  console.log(leagues)
   return (
     <table className="leaguetable">
       <thead>

@@ -71,7 +71,6 @@ function mapStateToProps(state, ownProps){
    text: author.firstName + ' ' + author.lastName
    };
    });*/
-  console.log(league)
   return {
     league: league,
     users: state.users,
