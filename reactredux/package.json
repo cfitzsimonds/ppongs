@@ -1,8 +1,8 @@
 {
-  "name": "pluralsight-redux-starter",
+  "name": "ppongs",
   "version": "1.0.0",
-  "description": "Starter kit for React and Redux Pluralsight course by Cory House",
-  "author": "Cory House",
+  "description": "Ping Pong online scorekeeper",
+  "author": "Ryan Michalec",
   "scripts":{
     "prestart": "babel-node tools/startMessage.js",
     "start": "npm-run-all --parallel open:src lint:watch test:watch",
