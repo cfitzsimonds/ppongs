@@ -67,7 +67,7 @@ const UserList = ({users, league}) => {
 
 UserList.propTypes = {
   users: PropTypes.array.isRequired,
-  league: PropTypes.string
+  league: PropTypes.string.isRequired
 };
 
 export default UserList;

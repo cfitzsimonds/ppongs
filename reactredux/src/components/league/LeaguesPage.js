@@ -18,6 +18,9 @@ class LeaguesPage extends React.Component {
   redirectToAddLeaguePage(){
     browserHistory.push('/league');
   }
+  redirectToCreateLeaguePage(){
+    browserHistory.push('/leagueCreate');
+  }
 
   render() {
     /*if((JSON.parse(localStorage.getItem('user'))).uid === ''){
@@ -26,13 +29,14 @@ class LeaguesPage extends React.Component {
     }*/
     let user = getUserById(this.props.users, (JSON.parse(localStorage.getItem('user'))).uid);
     const {leagues} = this.props;
+    console.log(leagues)
     return (
       <div>
         <h1>My Leagues</h1>
 
         <LeagueList leagues={leagues.filter(function(el){
           for (var i in user.leagues){
-            if (user.leagues[i].value === el.uid){
+            if (user.leagues[i].value == el.uid){
               return true;
             }
 
@@ -43,6 +47,11 @@ class LeaguesPage extends React.Component {
                value="Join League"
                className="btn btn-primary"
                onClick={this.redirectToAddLeaguePage}
+        />
+        <input type="submit"
+               value="Create a League"
+               className="btn btn-primary"
+               onClick={this.redirectToCreateLeaguePage}
         />
       </div>
     );

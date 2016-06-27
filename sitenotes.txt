@@ -61,10 +61,14 @@ add a points in league and ranking system to each player
 hosted on firebase
 
 
+leaguedisplay not working with added leagues
+
+Front page - like conversation with bartel
+- display of top players
+- quick add game button
 
 ---------------------------------------------
 admin page
-- add a league
 - remove a player from a league
 - delete a user
 - delete a game
@@ -77,10 +81,12 @@ change winner display
 
 prompt players involved in game to validate
 
--creation of sub leagues or tournaments within a league
+creation of sub leagues or tournaments within a league
 
 Long term, possibly restructure, store game history in leagues not in its own tabel, 
 -push game id to each league (works right now because of cross referencing but is slightly clunky/innefficient)
+
+
 
 
 ------------------------------------

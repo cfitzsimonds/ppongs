@@ -44,9 +44,9 @@ class LeagueDisplay extends React.Component {
       <div >
         <h1>{this.props.league.name}</h1>
         <h3>Members:</h3>
-        <UserList users={this.props.users} league={this.props.league.uid} />
+        <UserList users={this.props.users} league={this.props.league.uid.toString()} />
         <h3>Game History: </h3>
-        <GameList games={games} users={this.props.users} league={this.props.league.uid} />
+        <GameList games={games} users={this.props.users} league={this.props.league.uid.toString()} />
 
       </div>
     );

@@ -94,3 +94,8 @@ input:checked + .slider:before {
 #centeredimage {
   margin-left: auto; margin-right: auto;
 }
+#smallProPic{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}

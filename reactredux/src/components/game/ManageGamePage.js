@@ -114,12 +114,13 @@ class ManageGamePage extends React.Component {
       }))/400)];
 
     let e = [r[0]/(r[1]+r[0]),r[1]/(r[1]+r[0]) ]
-    let k = 32;
+    let k = 30 + Math.abs(thisgame.scores.left - thisgame.scores.right)/5;
     let s = [];
     let leftwinner = 1;
     let rightwinner = 1;
     let draw = 1;
     let matchtype = "";
+
 
     //this.props.useractions.saveUser()
     if (thisgame.game_type === 2){

@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import LeagueListRow from './LeagueListRow';
 
 const LeagueList = ({leagues}) => {
+  console.log(leagues)
   return (
     <table className="leaguetable">
       <thead>
@@ -11,7 +12,7 @@ const LeagueList = ({leagues}) => {
       </thead>
       <tbody>
       {leagues.map(league =>
-        <LeagueListRow key={league.uid} league={league}/>
+        <LeagueListRow key={league.uid.toString()} league={league}/>
       )}
       </tbody>
     </table>
