@@ -27,28 +27,23 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
 
       <SelectInput
         name="player_names.player_l_1"
-        label="Left Player 1"
+        label="You"
         value={game.player_names.player_l_1 }
-        defaultOption={"Select the first left player"}
-        options={allPlayers.filter(function(player){
-          for ( var i in player.leagues){
-            if (game.league_name === player.leagues[i].value){
-            return true;
-            }
-          }
-          return false;
-        })}
+        defaultOption="Select yourself"
+        options={[{value:currentPlayer.uid, text: currentPlayer.displayName}]}
         onChange={onChange}
-        error={errors.player_l_1}/>
+        error={errors.player_l_1}
+
+      />
 
 
 
       <SelectInput
         name="player_names.player_l_2"
-        label="Left Player 2"
+        label="Your Partner"
         value={game.player_names.player_l_2}
         onChange={onChange}
-        defaultOption="Select the second left player"
+        defaultOption="Select your partner"
         options={allPlayers.filter(function(player){
           for ( var i in player.leagues){
             if (game.league_name === player.leagues[i].value){
@@ -63,10 +58,10 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
 
       <SelectInput
         name="player_names.player_r_1"
-        label="Right Player 1"
+        label="Your Opponent"
         value={game.player_names.player_r_1}
         onChange={onChange}
-        defaultOption="Select the first right player"
+        defaultOption="Select your opponent"
         options={allPlayers.filter(function(player){
           for ( var i in player.leagues){
             if (game.league_name === player.leagues[i].value){
@@ -78,10 +73,10 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         error={errors.player_r_1}/>
       <SelectInput
         name="player_names.player_r_2"
-        label="Right Player 2"
+        label="Your Opponents Partner"
         value={game.player_names.player_r_2}
         onChange={onChange}
-        defaultOption="Select the second right player"
+        defaultOption="Select your opponent's partner"
         options={allPlayers.filter(function(player){
           for ( var i in player.leagues){
             if (game.league_name === player.leagues[i].value){

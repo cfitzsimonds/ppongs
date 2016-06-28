@@ -149,7 +149,7 @@ class UsersPage extends React.Component {
       />
     </div>);
     let loggedin = (<div>
-      <h1>Login successful! </h1>
+      <h1>Logged in! </h1>
       <input type="submit"
              value={"Log " + (this.state.currentUser)}
              className="btn btn-primary"

@@ -33,25 +33,37 @@ const Header = ({loading}) => {
       "elo" : 0
     }));
   }
-
+  let login = ((JSON.parse(localStorage.getItem('user'))).uid);
   return (
+
     <nav>
+
+
       <IndexLink to="/" activeClassName="active">Home</IndexLink>
       {" | "}
       <Link to="/about" activeClassName="active">About</Link>
       {" | "}
-      <Link to="/games" activeClassName="active">Games</Link>
-      {" | "}
-      <Link to="/users" activeClassName="active">Users</Link>
-      {" | "}
-      <Link to="/leagues" activeClassName="active">Leagues</Link>
-      {" | "}
-      <Link to="/h2h" activeClassName="active">HeadToHead</Link>
-      {" | "}
+      {login? <Link to="/games" activeClassName="active">Games</Link> : ""}
+
+      {login? " | " : ""}
+      {login? <Link to="/leagues" activeClassName="active">Leagues</Link> : ""}
+      {login? " | " : ""}
+      {login? <Link to="/h2h" activeClassName="active">HeadToHead</Link> : ""}
+      {login? " | " : ""}
       {
-        ((JSON.parse(localStorage.getItem('user'))))?(<Link to={((JSON.parse(localStorage.getItem('user'))).uid)?
-        ("/profile/"+((JSON.parse(localStorage.getItem('user'))).uid)):"/users"} activeClassName="active">
-      {((JSON.parse(localStorage.getItem('user'))).uid)? "My Profile": "Login"}</Link>):(<Link to="/users" activeClassName="active">Log in</Link>)}
+        // this looks messy, all it does is parse the user data so that if logged in it will bring you to your own profile
+        ((JSON.parse(localStorage.getItem('user'))))?
+          (<Link to={((JSON.parse(localStorage.getItem('user'))).uid)?
+              ("/profile/"+((JSON.parse(localStorage.getItem('user'))).uid))
+              :"/users"} activeClassName="active">
+                {((JSON.parse(localStorage.getItem('user'))).uid)?
+                  "My Profile":
+                  "Login"}
+          </Link>):
+          (<Link to="/users" activeClassName="active">Log in</Link>)}
+
+      {login? " | " : ""}
+      {login? <Link to="/users" activeClassName="active">Log Out</Link> : ""}
 
       {loading && <LoadingDots interval={100} dots={20}/>}
     </nav>

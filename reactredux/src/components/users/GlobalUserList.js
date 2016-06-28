@@ -9,7 +9,8 @@ const GlobalUserList = ({users}) => {
         <th>Place</th>
         <th>Icon</th>
         <th>Name</th>
-        <th>Elo</th>
+        <th>Wins</th>
+        <th><a href="https://en.wikipedia.org/wiki/Elo_rating_system">Elo</a></th>
 
 
 
@@ -33,6 +34,9 @@ const GlobalUserList = ({users}) => {
             <Link to={"/profile/"+user.uid}>
               {user.displayName}
             </Link>
+          </td>
+          <td>
+            {user.statistics.wins.singles + user.statistics.wins.doubles}
           </td>
           <td>
             {user.elo}

@@ -6,7 +6,7 @@ const GameListRow = ({game, users}) => {
   return (
 
     <tr>
-      <td><Link to={'/game/' + game.id}>{(new Date (game.id)).toDateString()}</Link></td>
+      <td>{(new Date (game.id)).toDateString()}</td>
       <td><Link to={"/profile/"+game.player_names.player_l_1}>{uidToNameLookup(game.player_names.player_l_1, users)} </Link><br />
         <Link to={"/profile/"+game.player_names.player_l_2}>{uidToNameLookup(game.player_names.player_l_2, users)}</Link></td>
 
