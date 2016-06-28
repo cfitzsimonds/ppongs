@@ -45,6 +45,9 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         onChange={onChange}
         defaultOption="Select your partner"
         options={allPlayers.filter(function(player){
+          if(player.value == currentPlayer.uid){
+            return false;
+          }
           for ( var i in player.leagues){
             if (game.league_name === player.leagues[i].value){
             return true;
@@ -63,6 +66,9 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         onChange={onChange}
         defaultOption="Select your opponent"
         options={allPlayers.filter(function(player){
+        if(player.value == currentPlayer.uid){
+            return false;
+          }
           for ( var i in player.leagues){
             if (game.league_name === player.leagues[i].value){
             return true;
@@ -78,6 +84,11 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         onChange={onChange}
         defaultOption="Select your opponent's partner"
         options={allPlayers.filter(function(player){
+
+        if(player.value == currentPlayer.uid){
+            return false;
+          }
+
           for ( var i in player.leagues){
             if (game.league_name === player.leagues[i].value){
             return true;

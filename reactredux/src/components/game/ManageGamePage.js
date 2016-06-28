@@ -69,6 +69,7 @@ class ManageGamePage extends React.Component {
       game.loser_id = (parseInt(game.scores.left) < parseInt(game.scores.right)) ?
       game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
     }
+    game.validated = 0;
     //let scorecomp = 1;
     //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
 
@@ -87,7 +88,13 @@ class ManageGamePage extends React.Component {
   redirect() {
     this.setState({saving: false});
     let thisgame = this.state.game;
-    let temp = uidLookup(thisgame.player_names.player_l_1, this.props.users);
+    let temp = uidLookup(thisgame.player_names.player_r_1, this.props.users);
+    temp.confirmations += 1;
+    this.props.useractions.saveUser(temp).catch(error => {
+      toastr.error(error);
+      this.setState({saving: false});
+    });
+
 
     //let x = emailjs.send("default_service","template_qdW3Lfz6",{recipient: temp.email, to_name: temp.displayName, secret: "5"});
     /// does in fact return a promise.  Considering using a prompt to send this to everyone, then making them all add a number up or something

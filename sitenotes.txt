@@ -90,10 +90,10 @@ creation of sub leagues or tournaments within a league
 Long term, possibly restructure, store game history in leagues not in its own tabel, 
 -push game id to each league (works right now because of cross referencing but is slightly clunky/innefficient)
 
-table view? (like in their app)
+table view? (like in guardian app)
 
 cannot add a player more than once in a game
-
+-on a backburner because not important for singles
 
 ------------------------------------
 
