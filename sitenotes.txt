@@ -67,6 +67,10 @@ Front page - like conversation with bartel
 - display of top players
 - quick add game button
 
+dynamic header
+
+must add yourself in a game
+
 ---------------------------------------------
 admin page
 - remove a player from a league
@@ -88,7 +92,7 @@ Long term, possibly restructure, store game history in leagues not in its own ta
 
 table view? (like in their app)
 
-
+cannot add a player more than once in a game
 
 
 ------------------------------------
