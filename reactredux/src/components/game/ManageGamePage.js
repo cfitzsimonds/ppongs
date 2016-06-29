@@ -90,6 +90,7 @@ class ManageGamePage extends React.Component {
     let thisgame = this.state.game;
     let temp = uidLookup(thisgame.player_names.player_r_1, this.props.users);
     temp.confirmations += 1;
+    temp.confirmlist.push(thisgame.id);
     this.props.useractions.saveUser(temp).catch(error => {
       toastr.error(error);
       this.setState({saving: false});

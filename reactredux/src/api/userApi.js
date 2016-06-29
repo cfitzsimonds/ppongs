@@ -55,6 +55,7 @@ class UserApi {
             games_played: 0
           }};
           user.confirmations = 0;
+          user.confirmlist = [];
 
           firebase.database().ref("users/").push(user);
           localStorage.setItem('user', JSON.stringify(user));
