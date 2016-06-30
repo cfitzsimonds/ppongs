@@ -14,6 +14,7 @@ import JoinLeaguePage from './components/league/JoinLeague'
 import HeadToHeadPage from './components/h2h/HeadToHead'
 import LeagueDisplay from './components/league/LeagueDisplay';
 import LeagueCreate from './components/league/LeagueCreate';
+import ConfirmationDirectory from './components/confirmation/ConfirmDir';
 
 export default (
   <Route path="/" component={App}>
@@ -32,5 +33,6 @@ export default (
     <Route path="league/:id" component={LeagueDisplay} />
     <Route path="h2h" component={HeadToHeadPage} />
     <Route path="leagueCreate" component={LeagueCreate} />
+    <Route path="confirm" component={ConfirmationDirectory} />
   </Route>
 );

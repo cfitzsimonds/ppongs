@@ -43,7 +43,7 @@ class GameApi {
         }
       }
 
-      if (game.id) {
+      if (game.confirmed == 1) {
         //update
         firebase.database().ref("games").orderByChild("id").on("child_added", function(snapshot) {
           if(snapshot.val().id === game.id) {
@@ -58,7 +58,7 @@ class GameApi {
         //Just simulating creation here.
         //The server would generate ids and watchHref's for new courses in a real app.
         //Cloning so copy returned is passed by value rather than by reference.
-        game.id = GameApi.generateId(game);
+        
         //game.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
         firebase.database().ref("games/").push(game);
 

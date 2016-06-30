@@ -65,8 +65,9 @@ const Header = ({loading}) => {
       {login? " | " : ""}
       {login? <Link to="/users" activeClassName="active">Log Out</Link> : ""}
       {login? " | " : ""}
-      {login? "Games requiring confirmation: " : ""}
-      {login? (JSON.parse(localStorage.getItem('user'))).confirmations : ""}
+      {login? <Link to="/confirm" activeClassName="active">{login? "Game confirmations " : ""}
+        {login? "("+(JSON.parse(localStorage.getItem('user'))).confirmations +")": ""}</Link> : ""}
+
       {loading && <LoadingDots interval={100} dots={20}/>}
     </nav>
   );

@@ -69,7 +69,8 @@ class ManageGamePage extends React.Component {
       game.loser_id = (parseInt(game.scores.left) < parseInt(game.scores.right)) ?
       game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
     }
-    game.validated = 0;
+    game.confirmed = 0;
+    game.id = (new Date()).getTime();
     //let scorecomp = 1;
     //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
 
@@ -90,7 +91,8 @@ class ManageGamePage extends React.Component {
     let thisgame = this.state.game;
     let temp = uidLookup(thisgame.player_names.player_r_1, this.props.users);
     temp.confirmations += 1;
-    temp.confirmlist.push(thisgame.id);
+
+    temp.confirmlist.push(thisgame.id.toString());
     this.props.useractions.saveUser(temp).catch(error => {
       toastr.error(error);
       this.setState({saving: false});
