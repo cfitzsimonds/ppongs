@@ -102,98 +102,6 @@ class ManageGamePage extends React.Component {
     //let x = emailjs.send("default_service","template_qdW3Lfz6",{recipient: temp.email, to_name: temp.displayName, secret: "5"});
     /// does in fact return a promise.  Considering using a prompt to send this to everyone, then making them all add a number up or something
     // Elo stuff
-    let l_elos = (this.props.users).filter(function (el) {
-      for (var i in thisgame.player_names){
-        if (thisgame.player_names[i] === el.uid && i[7] === "l"){
-          return true;
-        }
-      }
-      return false;
-    }.bind(this)).map(this.getElo);
-    let r_elos = (this.props.users).filter(function (el) {
-      for (var i in thisgame.player_names){
-        if (thisgame.player_names[i] === el.uid && i[7] === "r"){
-          return true;
-        }
-      }
-      return false;
-    }.bind(this)).map(this.getElo);
-    let r = [Math.pow(10,(l_elos.reduce(function(a, b){
-      return (a + b )/((b>0)? 2:1)
-    }))/400), Math.pow(10,(r_elos.reduce(function(a, b){
-        return (a + b )/((b>0)? 2:1)
-      }))/400)];
-
-    let e = [r[0]/(r[1]+r[0]),r[1]/(r[1]+r[0]) ]
-    let k = 30 + Math.abs(thisgame.scores.left - thisgame.scores.right)/5;
-    let s = [];
-    let leftwinner = 1;
-    let rightwinner = 1;
-    let draw = 1;
-    let matchtype = "";
-
-
-    //this.props.useractions.saveUser()
-    if (thisgame.game_type === 2){
-      matchtype = "doubles";
-    } else {
-      matchtype = "singles";
-
-    }
-    if(thisgame.winner === "Right"){
-      leftwinner = 0;
-      rightwinner = 1;
-      draw = 0;
-      s = [0, 1];
-    } else if (thisgame.winner === "Left"){
-      leftwinner = 1;
-      rightwinner = 0;
-      draw = 0;
-      s = [1, 0];
-    } else {
-      leftwinner = 0;
-      rightwinner = 0;
-      draw = 1;
-      s = [.5, .5];
-    }
-
-
-
-    for (var i in thisgame.player_names){
-      temp = uidLookup(thisgame.player_names[i], this.props.users);
-      if(temp == false){
-        continue;
-      }
-
-      temp.statistics.games_played[matchtype] += 1;
-      temp.league_stats[thisgame.league_name].games_played += 1;
-
-      if(i.indexOf("2") > -1 && matchtype === "singles"){
-        continue;
-      }
-      if(i[7] === "r" ){
-        temp.statistics.wins[matchtype] += rightwinner;
-        temp.statistics.losses[matchtype] += leftwinner;
-        temp.statistics.draws[matchtype] += draw;
-        temp.league_stats[thisgame.league_name].wins += rightwinner;
-        temp.league_stats[thisgame.league_name].losses += leftwinner;
-        temp.league_stats[thisgame.league_name].draws += draw;
-        temp.elo += Math.round(k * (s[1]- e[1]));
-      } else {
-        temp.statistics.wins[matchtype] += leftwinner;
-        temp.statistics.losses[matchtype] += rightwinner;
-        temp.statistics.draws[matchtype] += draw;
-        temp.league_stats[thisgame.league_name].wins += leftwinner;
-        temp.league_stats[thisgame.league_name].losses += rightwinner;
-        temp.league_stats[thisgame.league_name].draws += draw;
-        temp.elo += Math.round(k * (s[0]- e[0]));
-      }
-      this.props.useractions.saveUser(temp).catch(error => {
-        toastr.error(error);
-        this.setState({saving: false});
-      });
-    }
-
 
     toastr.success('Game saved');
     this.context.router.push('/games');
@@ -236,6 +144,7 @@ function getGameById(games, id) {
 function mapStateToProps(state, ownProps){
   const gameId = ownProps.params.id;
   let user = (JSON.parse(localStorage.getItem('user')));
+  console.log(user);
   let game ={
     "game_type" : "",
     "id" : "",
@@ -256,7 +165,7 @@ function mapStateToProps(state, ownProps){
 
   if (gameId && state.games.length > 0){
     game = getGameById(state.games, gameId);
-  }
+}
 
   const authorsFormattedForDropdown = state.users.map(author => {
     return {

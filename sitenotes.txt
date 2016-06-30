@@ -84,6 +84,8 @@ add more stat tracking - average score, etc, breakdown by league, etc
 change winner display
 
 prompt players involved in game to validate
+-did that
+-just need to filter it within game displays to only show validated games
 
 creation of sub leagues or tournaments within a league
 
@@ -91,10 +93,16 @@ Long term, possibly restructure, store game history in leagues not in its own ta
 -push game id to each league (works right now because of cross referencing but is slightly clunky/innefficient)
 
 table view? (like in guardian app)
+-maybe make it an option in game creation? probably do it on a separate page though
 
 cannot add a player more than once in a game
 -on a backburner because not important for singles
 
+When you add a game you switch users?
+Also subtraction only works sometimes - might be related
+probably in the api
+cannot add a game anymore after moving from api
+only loads in stuff from google not the info from the database
 ------------------------------------
 
 .filter(function(player){

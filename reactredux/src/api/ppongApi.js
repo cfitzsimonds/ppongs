@@ -38,7 +38,7 @@ class GameApi {
       }
       for (var key in game.scores){
         if (!isNumeric(game.scores[key]) ){
-          console.log(game.scores[key]);
+          //console.log(game.scores[key]);
           reject("Score must be a valid number");
         }
       }
@@ -58,7 +58,7 @@ class GameApi {
         //Just simulating creation here.
         //The server would generate ids and watchHref's for new courses in a real app.
         //Cloning so copy returned is passed by value rather than by reference.
-        
+
         //game.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
         firebase.database().ref("games/").push(game);
 
@@ -69,7 +69,6 @@ class GameApi {
   }
 
   static getAllGames() {
-    console.log("called2");
     return new Promise((resolve,  reject) => {
       firebase.database().ref("games/").on('value', function (data) {
         //console.log(data.val());

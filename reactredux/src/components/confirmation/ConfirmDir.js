@@ -224,7 +224,6 @@ class ConfirmGamesPage extends React.Component {
     const {games} = this.props;
 
     let user = this.props.user|| {leagues: []};
-    console.log(user)
     let users = this.props.users ;
     return (
       <div>
@@ -253,7 +252,6 @@ ConfirmGamesPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps){
-  console.log(state.users);
   let user = findUser(state.users, (JSON.parse(localStorage.getItem('user'))).uid);
 
   return {

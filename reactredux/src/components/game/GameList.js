@@ -4,6 +4,9 @@ import GameListRow from './GameListRow';
 // Need to come back and add columns/formatting
 
 const GameList = ({games, users, uid, league, uid2, uid3, uid4, uids}) => {
+  games = games.filter(function(game){
+    return game.confirmed == 1;
+  });
   if (uid){
     games = games.filter(function(game){
       for (var i in game.player_names){

@@ -68,8 +68,15 @@ class UsersPage extends React.Component {
     //let scorecomp = 1;
     //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
 
+
     this.props.actions.saveUser(this.state.user)
-      .then(() => this.redirect())
+      .then(() => {
+        localStorage.setItem('user', JSON.stringify(uidLookup(this.state.user.uid, this.props.users)));
+          this.redirect();
+
+          //console.log(uidLookup(this.state.user.uid, this.props.users))
+        }
+      )
       .catch(error => {
         toastr.error(error);
         this.setState({saving: false});
@@ -130,7 +137,7 @@ class UsersPage extends React.Component {
       this.setState({currentUser : "in"});
       //console.log("out")
       this.forceUpdate();
-      browserHistory.push('/games');
+      browserHistory.push('/users');
     }
     //browserHistory.push('/games');
   }
@@ -170,6 +177,7 @@ UsersPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps){
+  console.log(state.users)
   return {
     users: state.users
   };
@@ -192,4 +200,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(UsersPage);
 // can define a mapDispatchToProps but is automatically replaced by dispatch atm
 
 
-
+function uidLookup(uid, users){
+  for(var x in users){
+    if (users[x].uid === uid){
+      return users[x];
+    }
+  }
+  return false;
+}
