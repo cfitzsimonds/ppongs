@@ -177,7 +177,6 @@ UsersPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps){
-  console.log(state.users)
   return {
     users: state.users
   };

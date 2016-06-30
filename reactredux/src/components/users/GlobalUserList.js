@@ -1,7 +1,12 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 const GlobalUserList = ({users}) => {
-
+  users = users.filter(function(user){
+    return user.uid != '';
+  })
+  users = users.filter(function(user){
+    return user.hasOwnProperty('statistics');
+  })
   return (
     <table className="table">
       <thead>
