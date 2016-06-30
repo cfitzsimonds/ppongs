@@ -17,6 +17,8 @@ class ConfirmGamesPage extends React.Component {
     };
     this.saveGame = this.saveGame.bind(this);
     this.saveUser = this.saveUser.bind(this);
+    this.denyGame = this.denyGame.bind(this);
+    this.denyUser = this.denyUser.bind(this);
     this.redirectToAddGamePage = this.redirectToAddGamePage.bind(this);
     this.render = this.render.bind(this);
   }
@@ -161,17 +163,59 @@ class ConfirmGamesPage extends React.Component {
       });
     }
 
-    
+
 
 
       toastr.success('Game saved');
-      this.context.router.push('/games');
+      //this.context.router.push('/games');
 
 
   }
 
-  denier(){
-    console.log("deined");
+  denyGame(event){
+    event.preventDefault();
+    //
+    //Change this to selector with find by id and with taking in e.target.name
+    let game = getGameById(this.props.games, this.props.user.confirmlist[event.target.name]);
+    this.setState({saving: true});
+    this.setState({game: game});
+
+    game.confirmed = -1;
+
+    //let scorecomp = 1;
+    //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
+
+    //this.setState({game:game});
+    this.props.gameActions.saveGame(game)
+      .then(() => this.denyUser())
+      .catch(error => {
+        toastr.error(error);
+        this.setState({saving: false});
+      });
+
+  }
+
+  denyUser(){
+    this.setState({saving: false});
+    let thisgame = this.state.game;
+    let temp = uidLookup(thisgame.player_names.player_r_1, this.props.users);
+
+    temp.confirmations -= 1;
+
+    temp.confirmlist.splice(temp.confirmlist.indexOf(thisgame.id),1);
+
+      this.props.userActions.saveUser(temp).catch(error => {
+        toastr.error(error);
+        this.setState({saving: false});
+      });
+
+
+
+
+
+    toastr.success('Game saved');
+    //this.context.router.push('/games');
+
 
   }
 
@@ -184,20 +228,15 @@ class ConfirmGamesPage extends React.Component {
     let users = this.props.users ;
     return (
       <div>
-        <h1>Games</h1>
-        <input type="submit"
-               value="Add Game"
-               className="btn btn-primary"
-               onClick={this.redirectToAddGamePage}
+        <h1>Confirmations</h1>
 
-        />
         {user.leagues.map(function(el){
           return (<div key={el.value}><h3>{el.text}</h3>
             <ConfirmGameList  currentUser={this.props.user} games={user.confirmlist.slice(1).map(function(els){
               return (getGameById(this.props.games, els));
             }.bind(this))} users={users} league={el.value}
             confirm={this.saveGame}
-                              deny={this.denier}
+                              deny={this.denyGame}
             /></div>)
         }.bind(this))}
 
