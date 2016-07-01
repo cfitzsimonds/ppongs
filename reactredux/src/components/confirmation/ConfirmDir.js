@@ -137,8 +137,9 @@ class ConfirmGamesPage extends React.Component {
       }
       if(i[7] === "r" ){
         if(i[9] == "1"){
+          console.log(temp.confirmations)
           temp.confirmations -= 1;
-
+          console.log(temp.confirmations)
           temp.confirmlist.splice(temp.confirmlist.indexOf(thisgame.id),1);
         }
         temp.statistics.wins[matchtype] += rightwinner;
@@ -200,7 +201,9 @@ class ConfirmGamesPage extends React.Component {
     let thisgame = this.state.game;
     let temp = uidLookup(thisgame.player_names.player_r_1, this.props.users);
 
+
     temp.confirmations -= 1;
+
 
     temp.confirmlist.splice(temp.confirmlist.indexOf(thisgame.id),1);
 

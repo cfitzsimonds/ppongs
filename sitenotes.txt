@@ -103,6 +103,8 @@ Also subtraction only works sometimes - might be related
 probably in the api
 cannot add a game anymore after moving from api
 only loads in stuff from google not the info from the database
+
+doubles apparently doesnt work anymore
 ------------------------------------
 
 .filter(function(player){
