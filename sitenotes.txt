@@ -71,6 +71,16 @@ dynamic header
 
 must add yourself in a game
 
+prompt players involved in game to validate
+-did that
+-just need to filter it within game displays to only show validated games
+
+When you add a game you switch users? -fixed
+Also subtraction only works sometimes - might be related - fixed
+probably in the api - fixed
+cannot add a game anymore after moving from api - seems fixed
+only loads in stuff from google not the info from the database - fixed
+
 ---------------------------------------------
 admin page
 - remove a player from a league
@@ -83,9 +93,7 @@ add more stat tracking - average score, etc, breakdown by league, etc
 
 change winner display
 
-prompt players involved in game to validate
--did that
--just need to filter it within game displays to only show validated games
+
 
 creation of sub leagues or tournaments within a league
 
@@ -98,13 +106,13 @@ table view? (like in guardian app)
 cannot add a player more than once in a game
 -on a backburner because not important for singles
 
-When you add a game you switch users?
-Also subtraction only works sometimes - might be related
-probably in the api
-cannot add a game anymore after moving from api
-only loads in stuff from google not the info from the database
+local still not working 
 
-doubles apparently doesnt work anymore
+????????????????
+
+
+
+doubles apparently doesnt work anymore 
 ------------------------------------
 
 .filter(function(player){

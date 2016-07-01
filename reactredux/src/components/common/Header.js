@@ -4,6 +4,7 @@ import LoadingDots from './LoadingDots';
 import {browserHistory} from 'react-router';
 
 const Header = ({loading}) => {
+
   //firebase.database().ref("leagues/").push({name:"test", uid: "146651333333", admin:"A5it5HJdRtXiBM3dKyRAjUME5wz2", pin:"1234", members:["A5it5HJdRtXiBM3dKyRAjUME5wz2", "4Q7lBJlRX5M5sg3wCXTPdUTpDwy1"]});
   if(!(JSON.parse(localStorage.getItem('user')))){
     localStorage.setItem('user', JSON.stringify({
@@ -32,6 +33,8 @@ const Header = ({loading}) => {
       "uid" : "",
       "elo" : 0
     }));
+  } else {
+    localStorage.setItem('user', JSON.stringify(uidLookup((JSON.parse(localStorage.getItem('user'))).uid, (JSON.parse(localStorage.getItem('users'))))));
   }
   let login = ((JSON.parse(localStorage.getItem('user'))).uid);
   return (
@@ -66,7 +69,8 @@ const Header = ({loading}) => {
       {login? <Link to="/users" activeClassName="active">Log Out</Link> : ""}
       {login? " | " : ""}
       {login? <Link to="/confirm" activeClassName="active">{login? "Game confirmations " : ""}
-        {login? "("+((JSON.parse(localStorage.getItem('user'))).confirmlist.length-1) +")": ""}</Link> : ""}
+        {console.log((JSON.parse(localStorage.getItem('user'))))}
+        {login? "("+(((JSON.parse(localStorage.getItem('user'))).confirmlist|| ["a"]).length-1 ) +")": ""}</Link> : ""}
 
       {loading && <LoadingDots interval={100} dots={20}/>}
     </nav>
@@ -77,4 +81,13 @@ Header.propTypes = {
   loading: PropTypes.bool.isRequired
 };
 
+
 export default Header;
+function uidLookup(uid, users){
+  for(var x in users){
+    if (users[x].uid === uid){
+      return users[x];
+    }
+  }
+  return false;
+}

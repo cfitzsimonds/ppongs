@@ -106,6 +106,7 @@ class UserApi {
           v.push(data.val()[key]);
 
         }
+        localStorage.setItem('users', JSON.stringify((((v)))));
 
         resolve(v);
 
