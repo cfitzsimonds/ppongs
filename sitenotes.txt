@@ -83,6 +83,9 @@ only loads in stuff from google not the info from the database - fixed
 
 loads users locally for full reference to current user
 
+
+doubles apparently doesnt work anymore 
+
 ---------------------------------------------
 admin page
 - remove a player from a league
@@ -94,8 +97,6 @@ admin page
 add more stat tracking - average score, etc, breakdown by league, etc
 
 change winner display
-
-
 
 creation of sub leagues or tournaments within a league
 
@@ -114,7 +115,6 @@ local still not working
 
 
 
-doubles apparently doesnt work anymore 
 ------------------------------------
 
 .filter(function(player){

@@ -119,12 +119,12 @@ class UsersPage extends React.Component {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // The signed-in user info.
-        //console.log(result.user);
+        console.log(result);
         this.convertToStoreUser(result.user);
         this.saveUser();
         this.setState({currentUser: "out"});
         this.forceUpdate();
-        //browserHistory.push('/games');
+S        //browserHistory.push('/games');
         //browserHistory.go(-11);
 
       }.bind(this))

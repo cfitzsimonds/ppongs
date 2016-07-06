@@ -46,7 +46,6 @@ class LeagueApi {
   static getAllLeagues() {
     return new Promise((resolve,  reject) => {
       firebase.database().ref("leagues/").on('value', function (data) {
-        //console.log(data.val());
         let v = [];
         for (var key in data.val())
         {
