@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import ConfirmGameListRow from './ConfirmGameListRow';
+import ConfirmGameListRow from './AdminGameListRow';
 
 // Need to come back and add columns/formatting
 

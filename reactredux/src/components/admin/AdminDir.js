@@ -6,7 +6,7 @@ import * as userActions from '../../actions/userActions';
 import toastr from 'toastr';
 
 
-import ConfirmGameList from './ConfirmGameList';
+import ConfirmGameList from './AdminGameList';
 import {browserHistory} from 'react-router';
 
 class ConfirmGamesPage extends React.Component {
