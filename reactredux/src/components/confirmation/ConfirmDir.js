@@ -97,13 +97,17 @@ class ConfirmGamesPage extends React.Component {
     let matchtype = "";
 
 
+
     //this.props.useractions.saveUser()
-    if (thisgame.game_type === 2){
+    if (thisgame.game_type == 2){
       matchtype = "doubles";
     } else {
       matchtype = "singles";
 
     }
+
+    console.log("game type =" + matchtype)
+
     if(thisgame.winner === "Right"){
       leftwinner = 0;
       rightwinner = 1;

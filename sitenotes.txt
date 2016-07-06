@@ -81,6 +81,8 @@ probably in the api - fixed
 cannot add a game anymore after moving from api - seems fixed
 only loads in stuff from google not the info from the database - fixed
 
+loads users locally for full reference to current user
+
 ---------------------------------------------
 admin page
 - remove a player from a league

@@ -124,7 +124,6 @@ class UsersPage extends React.Component {
         this.saveUser();
         this.setState({currentUser: "out"});
         this.forceUpdate();
-        console.log("wont be where")
         //browserHistory.push('/games');
         //browserHistory.go(-11);
 
