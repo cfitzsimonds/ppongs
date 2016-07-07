@@ -86,6 +86,10 @@ loads users locally for full reference to current user
 
 doubles apparently doesnt work anymore 
 
+Long term, possibly restructure, store game history in leagues not in its own tabel, 
+-push game id to each league (works right now because of cross referencing but is slightly clunky/innefficient)
+ 
+
 ---------------------------------------------
 admin page
 - remove a player from a league
@@ -100,8 +104,6 @@ change winner display
 
 creation of sub leagues or tournaments within a league
 
-Long term, possibly restructure, store game history in leagues not in its own tabel, 
--push game id to each league (works right now because of cross referencing but is slightly clunky/innefficient)
 
 table view? (like in guardian app)
 -maybe make it an option in game creation? probably do it on a separate page though
@@ -113,7 +115,10 @@ local still not working
 
 ????????????????
 
+//need to log users again? i thought i did
+need to get users and stuff working in userpage
 
+dancing log in button
 
 ------------------------------------
 

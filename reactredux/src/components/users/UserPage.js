@@ -71,7 +71,7 @@ class UsersPage extends React.Component {
 
     this.props.actions.saveUser(this.state.user)
       .then(() => {
-        localStorage.setItem('user', JSON.stringify(uidLookup(this.state.user.uid, this.props.users)));
+        localStorage.setItem('user', JSON.stringify(uidLookup(firebase.auth().currentUser.uid, JSON.parse(localStorage.getItem('users')))));
           this.redirect();
 
           //console.log(uidLookup(this.state.user.uid, this.props.users))
@@ -119,7 +119,7 @@ class UsersPage extends React.Component {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // The signed-in user info.
-        console.log(result);
+        //console.log(result);
         this.convertToStoreUser(result.user);
         this.saveUser();
         this.setState({currentUser: "out"});
@@ -176,6 +176,7 @@ UsersPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps){
+  localStorage.setItem('users', JSON.stringify(state.users));
   return {
     users: state.users
   };
