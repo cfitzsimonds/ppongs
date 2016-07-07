@@ -10,6 +10,7 @@ class LeagueDisplay extends React.Component {
   constructor(props, context){
     super(props, context);
     this.handleClick = this.handleClick.bind(this);
+   // this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
     this.state = {
       //in use manage course form he recommends changing this
       user: Object.assign({}, this.props.user),
@@ -22,12 +23,12 @@ class LeagueDisplay extends React.Component {
 
   }
 
-  componentWillReceiveProps(nextProps){
-    if ( this.props.league.uid != nextProps.league.uid) {
+  /*componentWillReceiveProps(nextProps){
+    if ( this.props.league && this.props.league.uid!= nextProps.league.uid) {
       // handles refresh, runs anytime it thinks props might have chagned
       this.setState({league: Object.assign({}, nextProps.league)});
     }
-  }
+  }*/
   handleClick (e) {
     this.setState({checked: e.target.checked});
   };
