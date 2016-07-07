@@ -7,6 +7,8 @@ const GlobalUserList = ({users}) => {
   users = users.filter(function(user){
     return user.hasOwnProperty('statistics');
   })
+  console.log((ArrNoDupe(users).map(function(element){return JSON.parse(element)})))
+  users = (ArrNoDupe(users).map(function(element){return JSON.parse(element)}))
   return (
     <table className="table">
       <thead>
@@ -65,3 +67,23 @@ GlobalUserList.propTypes = {
 };
 
 export default GlobalUserList;
+function ArrNoDupe(a) {
+  var temp = {};
+  for (var i = 0; i < a.length; i++){
+
+
+    temp[(a[i].uid)] = true;}
+
+  return Object.keys(temp).map(function(el){
+    return JSON.stringify(uidLookup(el, JSON.parse(localStorage.getItem('users'))));
+
+  });
+}
+function uidLookup(uid, users){
+  for(var x in users){
+    if (users[x].uid === uid){
+      return users[x];
+    }
+  }
+  return false;
+}

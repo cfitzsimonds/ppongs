@@ -13,7 +13,10 @@ const JoinLeagueForm = ({allLeagues,onChange,onSave,league,errors,saving}) => {
         label="League Name"
         value={league.name}
         defaultOption="Select a league"
-        options={allLeagues.map(function(element){
+        options={allLeagues.sort(function(a, b){
+          return a.name.toLowerCase() > b.name.toLowerCase();
+
+        }).map(function(element){
           return {
           text: element.name,
           value: element.uid

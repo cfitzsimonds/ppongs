@@ -47,7 +47,7 @@ class UsersPage extends React.Component {
     newUser.uid = googUser.uid;
     newUser.email = googUser.email;
     // handle leagues later
-    newUser.proPic = (googUser.photoURL || 'http://i.imgur.com/Zui7Sop.png');
+    newUser.proPic = (googUser.photoURL || 'https://i.imgur.com/Zui7Sop.png');
     // might need refreshtoken later?
     this.setState({user: newUser});
   }
@@ -162,9 +162,7 @@ class UsersPage extends React.Component {
              onClick={this.redirectToAddUserPage}
       />
     </div>);
-    return (((!(/[^a-zA-Z0-9]/.test(localStorage.getItem('userid'))))&&!((localStorage.getItem('userid'))=== null))? loggedin : (loggedout)
-
-    );
+    return (((!(/[^a-zA-Z0-9]/.test(localStorage.getItem('userid'))))&&!((localStorage.getItem('userid'))=== null))? loggedin : (loggedout));
   }
 }
 

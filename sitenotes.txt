@@ -111,12 +111,11 @@ table view? (like in guardian app)
 cannot add a player more than once in a game
 -on a backburner because not important for singles
 
-local still not working 
+private leagues
+
+salting
 
 ????????????????
-
-//need to log users again? i thought i did
-need to get users and stuff working in userpage
 
 dancing log in button
 

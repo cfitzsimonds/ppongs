@@ -122,20 +122,3 @@ function isNumeric(n) {
 }
 
 export default UserApi;
-const game1 = {
-  game_type: 1,
-  player_names: {
-    player_l_1: "Ryan",
-    player_l_2: "",
-    player_r_1: "Michael",
-    player_r_2: ""
-  },
-  game_id: 1465916389175,
-  scores: {
-    left: 21,
-    right: 1
-  },
-  winner: "left",
-  league_name: "nd"
-
-};
