@@ -29,6 +29,7 @@ class GamesPage extends React.Component {
       //browserHistory.push('/users');
 
     }
+    {firebase.database().ref("dinos/").push({test:"ayy"})}
     const {games} = this.props;
     let user = this.props.user|| {leagues: []};
     let users = this.props.users ;

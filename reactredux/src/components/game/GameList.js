@@ -76,10 +76,10 @@ const GameList = ({games, users, uid, league, uid2, uid3, uid4, uids}) => {
       <thead>
       <tr>
         <th>Game Date</th>
-        <th>Left Team</th>
-        <th>Left Score</th>
-        <th>Right Score</th>
-        <th>Right Team</th>
+        <th>Home Team</th>
+        <th>Home Team Score</th>
+        <th>Away Team Score</th>
+        <th>Away Team</th>
         <th>Winner</th>
 
       </tr>

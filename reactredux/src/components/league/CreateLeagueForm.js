@@ -4,6 +4,7 @@ import SelectInput from '../common/SelectInput';
 
 const CreateLeagueForm = ({allLeagues,onChange,onSave,league,errors,saving}) => {
   //console.log(allLeagues)
+  let sportList = ['baseball', 'ping pong', 'basketball', 'squash', 'racquetball', 'tennis', 'cornhole'];
   return (
     <div>
       <h1>Create a league</h1>
@@ -20,11 +21,23 @@ const CreateLeagueForm = ({allLeagues,onChange,onSave,league,errors,saving}) => 
 
       <TextInput
         name="pin"
-        label="League pin"
+        label="Create a league registration pin"
         value={league.pin || ""}
         onChange={onChange}
         error={errors.pin}/>
 
+      <SelectInput
+        name="sport"
+        label="Sport"
+        value={league.sport }
+        defaultOption="Select what sport this league will be tracking"
+        options={sportList.sort().map(function(el){
+        return {text:el, value: el}
+        })}
+        onChange={onChange}
+        error={errors.sport}
+
+      />
 
 
       <input

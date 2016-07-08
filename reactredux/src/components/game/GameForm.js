@@ -6,7 +6,7 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
 //  console.log(currentPlayer.leagues)
   return (
     <div>
-      <h1>Manage Game</h1>
+      <h1>Add Game</h1>
 
       <SelectInput
         name="game_type"

@@ -3,11 +3,10 @@ import {Link} from 'react-router';
 const GlobalUserList = ({users}) => {
   users = users.filter(function(user){
     return user.uid != '';
-  })
+  });
   users = users.filter(function(user){
     return user.hasOwnProperty('statistics');
-  })
-  console.log((ArrNoDupe(users).map(function(element){return JSON.parse(element)})))
+  });
   users = (ArrNoDupe(users).map(function(element){return JSON.parse(element)}))
   return (
     <table className="table">

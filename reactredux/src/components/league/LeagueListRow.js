@@ -5,6 +5,7 @@ const LeagueListRow = ({league}) => {
   return (
     <tr>
       <td><Link to={'/league/' + league.uid}>{league.name}</Link></td>
+      <td>{league.sport}</td>
     </tr>
   );
 };
