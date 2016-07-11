@@ -14,8 +14,8 @@ process.stdin.setRawMode(true);
 process.stdin.on('keypress', (str, key) => {
   app.database().ref('dinos/').once('value', function(el){
     console.log(el.val())
-    let temp = {};
-    let k = '';
+    var temp = {};
+    var k = '';
     for (var x in el.val()){
       temp[x] = el.val()[x];
       k = x;

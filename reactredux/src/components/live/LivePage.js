@@ -9,6 +9,21 @@ class HomePage extends React.Component {
     super(props, context);
     this.render = this.render.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+
+    firebase.database().ref('dinos/').once('value', function(el){
+      let temp = {};
+      let k = '';
+      for (var x in el.val()){
+        temp[x] = el.val()[x];
+        k = x;
+      }
+
+        temp[k]['away'] = 0;
+        temp[k]['home'] = 0;
+        firebase.database().ref('dinos/').update(temp);
+
+      })
+
     this.state = {
       //in use manage course form he recommends changing this
       users: Object.assign({}, this.props.users),
@@ -52,22 +67,28 @@ class HomePage extends React.Component {
     return (
 
       <div className="jumbotron">
+      <h1>Live Score Feed</h1>
+      <table className="table" id="bigT">
+        <thead>
+        <tr>
+          <th><h2>Home</h2></th>
+          <th><h2>Away</h2></th>
 
-
-
-
-        <h1>PPong</h1>
-        <p>Ping Pong Online Game Scorer&nbsp;</p>
-        <Link to="users" className="btn btn-primary btn-lg">Log in/out</Link>&nbsp;
-        <Link to="about" className="btn btn-primary btn-lg">Learn More</Link>&nbsp;
-
-        {login? <Link to="game" className="btn btn-primary btn-lg">Add a game</Link>:""}&nbsp;
-        <h2>Top ranking players:</h2>
-        <GlobalUserList users={this.props.users}/>
-      </div>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><h2>{this.state.home}</h2></td>
+          <td><h2>{this.state.away}</h2></td>
+        </tr>
+        </tbody>
+      </table>
+	     </div>
     );
+
   }
 }
+
 function mapStateToProps(state, ownProps){
   return {
     users: state.users,

@@ -15,6 +15,7 @@ import HeadToHeadPage from './components/h2h/HeadToHead'
 import LeagueDisplay from './components/league/LeagueDisplay';
 import LeagueCreate from './components/league/LeagueCreate';
 import ConfirmationDirectory from './components/confirmation/ConfirmDir';
+import LivePage from './components/live/LivePage';
 
 export default (
   <Route path="/" component={App}>
@@ -34,5 +35,6 @@ export default (
     <Route path="h2h" component={HeadToHeadPage} />
     <Route path="leagueCreate" component={LeagueCreate} />
     <Route path="confirm" component={ConfirmationDirectory} />
+    <Route path="live" component={LivePage} />
   </Route>
 );
