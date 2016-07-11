@@ -20,6 +20,7 @@ class ManageGamePage extends React.Component {
 
     this.updateGameState = this.updateGameState.bind(this);
     this.saveGame = this.saveGame.bind(this);
+    this.goLive = this.goLive.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
@@ -62,9 +63,11 @@ class ManageGamePage extends React.Component {
     if ((game.scores.left === game.scores.right)) {
       game.winner = "Neither";
     } else {
-      game.winner = (parseInt(game.scores.left) > parseInt(game.scores.right)) ?
+      game.winner = (parseInt(game.scores.left) >
+                    parseInt(game.scores.right)) ?
         "Left" : "Right";
-      game.winner_id = (parseInt(game.scores.left) > parseInt(game.scores.right)) ?
+      game.winner_id = (parseInt(game.scores.left) >
+                        parseInt(game.scores.right)) ?
       game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
       game.loser_id = (parseInt(game.scores.left) < parseInt(game.scores.right)) ?
       game.player_names.player_l_1 +" "+ game.player_names.player_l_2 : game.player_names.player_r_1 +" "+ game.player_names.player_r_2;
@@ -82,6 +85,12 @@ class ManageGamePage extends React.Component {
         this.setState({saving: false});
       });
 
+  }
+  goLive(event){
+    event.preventDefault();
+    let game = this.state.game;
+    localStorage.setItem('game', JSON.stringify(game));
+    this.context.router.push('/live');
   }
   getElo(user){
     return (user.elo || 0);
@@ -118,6 +127,7 @@ class ManageGamePage extends React.Component {
         errors={this.state.errors}
         saving={this.state.saving}
         currentPlayer={this.state.user}
+        live={this.goLive}
       />
     );
   }
@@ -144,7 +154,6 @@ function getGameById(games, id) {
 function mapStateToProps(state, ownProps){
   const gameId = ownProps.params.id;
   let user = (JSON.parse(localStorage.getItem('user')));
-  console.log(user);
   let game ={
     "game_type" : "",
     "id" : "",
@@ -191,7 +200,8 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageGamePage);
+export default connect(mapStateToProps,
+                      mapDispatchToProps)(ManageGamePage);
 function getUserById(users, id) {
   const user = users.filter(user => user.uid == id);
   if (user.length) return user[0];

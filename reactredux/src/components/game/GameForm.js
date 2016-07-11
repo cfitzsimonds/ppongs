@@ -2,7 +2,7 @@ import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPlayer}) => {
+const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPlayer, live}) => {
 //  console.log(currentPlayer.leagues)
   return (
     <div>
@@ -100,7 +100,18 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         disabled={game.game_type -2}
       />
 
-
+      <input
+        type="submit"
+        disabled={!((!!game.game_type)&&(!!game.league_name)&&
+          (!!game.player_names.player_l_1) &&(!!game.player_names.player_r_1)&&(
+            !!((game.game_type=="2" && !!game.player_names.player_l_2 &&
+            !!game.player_names.player_r_2)||(game.game_type=="1") ) ))}
+        value={'Go live'}
+        className="btn btn-primary"
+        onClick={live}
+      />
+    <br />
+    &nbsp;
       <TextInput
         name="scores.left"
         label="Left Team Score"
@@ -122,6 +133,7 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         className="btn btn-primary"
         onClick={onSave}
       />
+
     </div>
   );
 };
@@ -136,4 +148,3 @@ GameForm.propTypes = {
 };
 
 export default GameForm;
-
