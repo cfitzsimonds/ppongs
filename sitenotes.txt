@@ -133,3 +133,19 @@ dancing log in button
           }
           return false;
         })
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       -
+
+
+
+
+
+
+last thing to do, i am adding n=indexes to the league pages, need to add a score page any time i create a new table thing for it in my database do it doesnt start blank
+
+also possible to disable live if league does not have live api

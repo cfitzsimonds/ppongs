@@ -22,7 +22,6 @@ class ManageGamePage extends React.Component {
     this.saveGame = this.saveGame.bind(this);
     this.goLive = this.goLive.bind(this);
   }
-
   componentWillReceiveProps(nextProps){
     if ( this.props.game.id != nextProps.game.id) {
       // handles refresh, runs anytime it thinks props might have chagned

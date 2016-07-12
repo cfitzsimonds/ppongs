@@ -12,18 +12,22 @@ class HomePage extends React.Component {
     super(props, context);
     this.render = this.render.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-
-    firebase.database().ref('dinos/').once('value', function(el){
+    let game =  JSON.parse(localStorage.getItem("game"));
+    firebase.database().ref('live/').once('value', function(el){
       let temp = {};
       let k = '';
+      console.log(el.val())
       for (var x in el.val()){
-        temp[x] = el.val()[x];
-        k = x;
+        if(el.val()[x]['name'] == game.league_name){
+          temp[x] = el.val()[x];
+          k = x;
+        }
+
       }
 
         temp[k]['away'] = 0;
         temp[k]['home'] = 0;
-        firebase.database().ref('dinos/').update(temp);
+        firebase.database().ref('live/').update(temp);
 
       })
 
@@ -35,11 +39,12 @@ class HomePage extends React.Component {
       game: JSON.parse(localStorage.getItem("game"))
     };
     this.saveGame = this.saveGame.bind(this);
+    this.redirect = this.redirect.bind(this);
 
   }
 
   testasdf(){
-    {firebase.database().ref("dinos").on("child_changed", function(snapshot){
+    {firebase.database().ref("live/").on("child_changed", function(snapshot){
      console.log(snapshot.val());
     })
     }
@@ -85,7 +90,7 @@ class HomePage extends React.Component {
     sg = sg.bind(this);
     let game = this.state.game;
     console.log(game)
-    firebase.database().ref("dinos").on("child_changed", function(snapshot){
+    firebase.database().ref("live/").on("child_changed", function(snapshot){
 
       let h = snapshot.val().home;
       let a = snapshot.val().away;
