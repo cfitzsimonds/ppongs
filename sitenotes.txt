@@ -148,7 +148,9 @@ dancing log in button
 
 last thing to do, i am adding n=indexes to the league pages, need to add a score page any time i create a new table thing for it in my database do it doesnt start blank
 
-also possible to disable live if league does not have live api
+also possible to disable live if league does not have live api -not for demo
+
+erase from live page
 
 add league id to header and make it so that it can be updated from anywhere (duh) - fixed
 
@@ -159,5 +161,7 @@ buttons
 52:54:00:12:35:02
 c0:3f:d5:60:cd:08
 00:17:c5:73:0b:3c
+7c:7a:91:46:40:ec
+24:de:c6:c9:8a:fe
 
 is currently always a user behind - fixed

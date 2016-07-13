@@ -112,7 +112,7 @@ class LivePage extends React.Component {
       if (h == 21 || a == 21){
         console.log("game over")
         sg();
-        move('/games/')
+        setTimeout(function(){move('/games/')},500 );
       }
     })
   }
@@ -122,9 +122,10 @@ class LivePage extends React.Component {
   redirect() {
     this.setState({saving: false});
 
-    let thisgame = this.state.game;
+    let thisgame = this.state.live.game;
     console.log(thisgame);
     let temp = uidLookup(thisgame.player_names.player_r_1, this.props.users);
+    console.log(temp)
     temp.confirmations += 1;
 
     temp.confirmlist.push(thisgame.id.toString());
@@ -137,7 +138,12 @@ class LivePage extends React.Component {
     //let x = emailjs.send("default_service","template_qdW3Lfz6",{recipient: temp.email, to_name: temp.displayName, secret: "5"});
     /// does in fact return a promise.  Considering using a prompt to send this to everyone, then making them all add a number up or something
     // Elo stuff
-
+    let x = this.state.live;
+    x.game = {};
+    this.props.liveactions.saveLive(x).catch(error => {
+      toastr.error(error);
+      this.setState({saving: false});
+    });
     toastr.success('Game saved');
     //this.context.router.push('/games');
 

@@ -61,7 +61,7 @@ class UsersPage extends React.Component {
   }
 
   saveUser() {
-    event.preventDefault();
+    //event.preventDefault();
     let user = this.state.user;
     this.setState({saving: true});
 
