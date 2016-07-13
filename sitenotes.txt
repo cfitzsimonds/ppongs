@@ -3,7 +3,7 @@ create database to store users
 create database of leagues
 
 
-look at avatar content 
+look at avatar content
 http://materializecss.com/collections.html#!
 
 create based on that for a selector for who you are playing against
@@ -41,7 +41,7 @@ sort by league on games page
 - done
 
 add a me page in the header to view user profile
-- done, but would like the text to flip between 
+- done, but would like the text to flip between
 
 need a refresh to keep current user updated
 -? maybe lookup in header
@@ -53,7 +53,7 @@ need head to head history
 
 rating system
 - works but maybe display members of a league on the league page
-- maybe add list of games played to the user on every game played  
+- maybe add list of games played to the user on every game played
 
 
 add a points in league and ranking system to each player
@@ -84,11 +84,11 @@ only loads in stuff from google not the info from the database - fixed
 loads users locally for full reference to current user
 
 
-doubles apparently doesnt work anymore 
+doubles apparently doesnt work anymore
 
-Long term, possibly restructure, store game history in leagues not in its own tabel, 
+Long term, possibly restructure, store game history in leagues not in its own tabel,
 -push game id to each league (works right now because of cross referencing but is slightly clunky/innefficient)
- 
+
 
 ---------------------------------------------
 admin page
@@ -149,3 +149,9 @@ dancing log in button
 last thing to do, i am adding n=indexes to the league pages, need to add a score page any time i create a new table thing for it in my database do it doesnt start blank
 
 also possible to disable live if league does not have live api
+
+add league id to header and make it so that it can be updated from anywhere (duh)
+
+slack bot
+
+is currently always a user behind

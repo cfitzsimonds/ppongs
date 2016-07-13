@@ -5,9 +5,10 @@ import React, {PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import * as gameActions from '../../actions/gameActions';
 import * as userActions from '../../actions/userActions';
+import * as liveActions from '../../actions/liveActions';
 import toastr from 'toastr';
 
-class HomePage extends React.Component {
+class LivePage extends React.Component {
   constructor(props, context){
     super(props, context);
     this.render = this.render.bind(this);
@@ -16,7 +17,7 @@ class HomePage extends React.Component {
     firebase.database().ref('live/').once('value', function(el){
       let temp = {};
       let k = '';
-      console.log(el.val())
+    //  console.log(el.val())
       for (var x in el.val()){
         if(el.val()[x]['name'] == game.league_name){
           temp[x] = el.val()[x];
@@ -36,7 +37,8 @@ class HomePage extends React.Component {
       users: Object.assign({}, this.props.users),
       home: 0,
       away: 0,
-      game: JSON.parse(localStorage.getItem("game"))
+      game: JSON.parse(localStorage.getItem("game")),
+      live: Object.assign({}, this.props.live)
     };
     this.saveGame = this.saveGame.bind(this);
     this.redirect = this.redirect.bind(this);
@@ -54,7 +56,8 @@ class HomePage extends React.Component {
 
   }
   saveGame(){
-    let game = this.state.game;
+    if (!this.state.live) {return ''}
+    let game = this.state.live.game ;
     this.setState({saving: true});
     if ((game.scores.left === game.scores.right)) {
       game.winner = "Neither";
@@ -83,15 +86,21 @@ class HomePage extends React.Component {
 
   }
   componentDidMount(){
-
+    let move = this.context.router.push;
+    console.log(move)
     let t = this.setState;
     t = t.bind(this);
     let sg = this.saveGame;
     sg = sg.bind(this);
-    let game = this.state.game;
-    console.log(game)
-    firebase.database().ref("live/").on("child_changed", function(snapshot){
+    console.log(this.state.live.game)
+    let game = this.state.live.game;
+    let live = {};
 
+
+
+
+    firebase.database().ref("live/").on("child_changed", function(snapshot){
+      console.log(game)
       let h = snapshot.val().home;
       let a = snapshot.val().away;
       if (h > 21 || a > 21){
@@ -103,6 +112,7 @@ class HomePage extends React.Component {
       if (h == 21 || a == 21){
         console.log("game over")
         sg();
+        move('/games/')
       }
     })
   }
@@ -149,7 +159,6 @@ class HomePage extends React.Component {
         <tr>
           <th><h2>Home</h2></th>
           <th><h2>Away</h2></th>
-
         </tr>
         </thead>
         <tbody>
@@ -164,10 +173,13 @@ class HomePage extends React.Component {
 
   }
 }
-
+LivePage.contextTypes = {
+  router: PropTypes.object
+};
 function mapStateToProps(state, ownProps){
-  const gameId = ownProps.params.id;
+  const liveId = ownProps.params.id;
   let user = (JSON.parse(localStorage.getItem('user')));
+  let live = {};
   let game ={
     "game_type" : "",
     "id" : "",
@@ -186,15 +198,21 @@ function mapStateToProps(state, ownProps){
     "winner_id": "",
     "loser_id": ""};
 
-  if (gameId && state.games.length > 0){
-    game = getGameById(state.games, gameId);
+    //console.log(state.lives);
+  // need to look up stored game in live game thing here
+  for(var x in state.lives){
+    if (state.lives[x].name == liveId){
+      live = state.lives[x];
+    }
   }
+  //console.log(state.lives);
 
   const authorsFormattedForDropdown = state.users.map(author => {
     return {
       value: author.uid,
       text: author.displayName,
-      leagues: author.leagues
+      leagues: author.leagues,
+
     };
   });
 
@@ -204,17 +222,22 @@ function mapStateToProps(state, ownProps){
     users: state.users,
     user: user,
     home: 0,
-    away: 0
+    away: 0,
+    leagues: state.leagues,
+    liveId : liveId,
+    live : live
+
   };
 }
 function mapDispatchToProps(dispatch) {
 
   return {
     actions: bindActionCreators(gameActions, dispatch),
-    useractions: bindActionCreators(userActions, dispatch)
+    useractions: bindActionCreators(userActions, dispatch),
+    liveactions: bindActionCreators(liveActions, dispatch)
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(LivePage);
 
 function uidLookup(uid, users){
   for(var x in users){

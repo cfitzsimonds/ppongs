@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as gameActions from '../../actions/gameActions';
 import * as userActions from '../../actions/userActions';
+import * as liveActions from '../../actions/liveActions';
 import GameForm from './GameForm';
 import toastr from 'toastr';
+
 
 class ManageGamePage extends React.Component {
   constructor(props, context){
@@ -86,10 +88,18 @@ class ManageGamePage extends React.Component {
 
   }
   goLive(event){
+    let move = this.context.router.push;
     event.preventDefault();
     let game = this.state.game;
-    localStorage.setItem('game', JSON.stringify(game));
-    this.context.router.push('/live');
+    this.props.liveactions.saveLive({home:0, away:0, game:game, name:game.league_name}).then(()=>{
+      move('/games/');
+      move('/live/'+game.league_name);
+    }).catch(error => {
+      toastr.error(error);
+      this.setState({saving: false});
+    });
+    //localStorage.setItem('game', JSON.stringify(game));
+
   }
   getElo(user){
     return (user.elo || 0);
@@ -195,7 +205,8 @@ function mapDispatchToProps(dispatch) {
 
   return {
     actions: bindActionCreators(gameActions, dispatch),
-    useractions: bindActionCreators(userActions, dispatch)
+    useractions: bindActionCreators(userActions, dispatch),
+    liveactions: bindActionCreators(liveActions, dispatch)
   };
 }
 

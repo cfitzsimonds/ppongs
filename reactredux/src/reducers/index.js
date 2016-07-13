@@ -4,6 +4,7 @@ import authors from './authorReducer';
 import games from './gameReducer';
 import users from './userReducer';
 import leagues from './leagueReducer';
+import lives from './liveReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   authors,
   users,
   leagues,
+  lives,
   ajaxCallsInProgress
 });
 

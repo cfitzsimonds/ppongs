@@ -35,6 +35,6 @@ export default (
     <Route path="h2h" component={HeadToHeadPage} />
     <Route path="leagueCreate" component={LeagueCreate} />
     <Route path="confirm" component={ConfirmationDirectory} />
-    <Route path="live" component={LivePage} />
+    <Route path="live/:id" component={LivePage} />
   </Route>
 );
