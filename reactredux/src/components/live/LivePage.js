@@ -123,9 +123,7 @@ class LivePage extends React.Component {
     this.setState({saving: false});
 
     let thisgame = this.state.live.game;
-    console.log(thisgame);
     let temp = uidLookup(thisgame.player_names.player_r_1, this.props.users);
-    console.log(temp)
     temp.confirmations += 1;
 
     temp.confirmlist.push(thisgame.id.toString());
@@ -135,9 +133,7 @@ class LivePage extends React.Component {
     });
 
 
-    //let x = emailjs.send("default_service","template_qdW3Lfz6",{recipient: temp.email, to_name: temp.displayName, secret: "5"});
-    /// does in fact return a promise.  Considering using a prompt to send this to everyone, then making them all add a number up or something
-    // Elo stuff
+  
     let x = this.state.live;
     x.game = {};
     this.props.liveactions.saveLive(x).catch(error => {
@@ -163,8 +159,8 @@ class LivePage extends React.Component {
       <table className="table" id="bigT">
         <thead>
         <tr>
-          <th><h2>Home</h2></th>
-          <th><h2>Away</h2></th>
+          <th><h2>{uidLookup(this.state.live.game.player_names.player_l_1, this.state.users).displayName}</h2></th>
+          <th><h2>{uidLookup(this.state.live.game.player_names.player_r_1, this.state.users).displayName}</h2></th>
         </tr>
         </thead>
         <tbody>

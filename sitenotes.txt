@@ -150,11 +150,11 @@ last thing to do, i am adding n=indexes to the league pages, need to add a score
 
 also possible to disable live if league does not have live api -not for demo
 
-erase from live page
+erase from live page - done
 
 add league id to header and make it so that it can be updated from anywhere (duh) - fixed
 
-slack bot
+slack bot - done ish
 
 buttons
 -incorrect mac addresses = 08:00:27:54:4c:c1
