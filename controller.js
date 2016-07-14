@@ -9,4 +9,4 @@ app = firebase.initializeApp(config);
 
 x = function(stuff){console.log( stuff.val())}
 
-app.database().ref('dinos/').on('child_added', x)
+app.database().ref('dinos/').update({'-KMeX51G-DOKjrHPewBN':{a:(new Date).getTime()}})

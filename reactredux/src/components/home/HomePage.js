@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import GlobalUserList from '../users/GlobalUserList';
 import {connect} from 'react-redux';
@@ -20,7 +20,7 @@ class HomePage extends React.Component {
   }
 
   testasdf(){
-    {firebase.database().ref("dinos").on("child_changed", function(snapshot){
+    {firebase.database().ref("dinos").once("child_changed", function(snapshot){
      console.log(snapshot.val());
     })
     }
@@ -30,12 +30,12 @@ class HomePage extends React.Component {
 
   }
   componentDidMount(){
-    let t = this.setState;
+    let t = this.context.router.push;
     t = t.bind(this);
-    firebase.database().ref("dinos").on("child_changed", function(snapshot){
-      let h = snapshot.val().home;
-      let a = snapshot.val().away;
-      t({home: h, away: a});
+    firebase.database().ref("dinos").once("child_changed", function(snapshot){
+      t('/game');
+      t('/live/1466513558321');
+
     })
   }
   awayup(){
@@ -68,6 +68,9 @@ class HomePage extends React.Component {
     );
   }
 }
+HomePage.contextTypes = {
+  router: PropTypes.object
+};
 function mapStateToProps(state, ownProps){
   return {
     users: state.users,
@@ -75,4 +78,5 @@ function mapStateToProps(state, ownProps){
     away: 0
   };
 }
+
 export default connect(mapStateToProps)(HomePage);
