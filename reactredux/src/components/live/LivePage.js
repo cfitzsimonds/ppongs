@@ -14,15 +14,6 @@ class LivePage extends React.Component {
     this.render = this.render.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     let game =  JSON.parse(localStorage.getItem("game"));
-    console.log(this.props)
-    this.state = {
-      //in use manage course form he recommends changing this
-      users:  this.props.users,
-      home: 0,
-      away: 0,
-      game: JSON.parse(localStorage.getItem("game")),
-      live: Object.assign({}, this.props.live)
-    };
     firebase.database().ref('live/').once('value', function(el){
       let temp = {};
       let k = '';
@@ -41,7 +32,14 @@ class LivePage extends React.Component {
 
       })
 
-
+    this.state = {
+      //in use manage course form he recommends changing this
+      users: Object.assign({}, this.props.users),
+      home: 0,
+      away: 0,
+      game: JSON.parse(localStorage.getItem("game")),
+      live: Object.assign({}, this.props.live)
+    };
     this.saveGame = this.saveGame.bind(this);
     this.redirect = this.redirect.bind(this);
 
@@ -59,7 +57,7 @@ class LivePage extends React.Component {
   }
   saveGame(){
     if (!this.state.live) {return ''}
-    let game = this.state.live.game;
+    let game = this.state.live.game ;
     this.setState({saving: true});
     if ((game.scores.left === game.scores.right)) {
       game.winner = "Neither";
@@ -87,13 +85,6 @@ class LivePage extends React.Component {
       });
 
   }
-  componentWillReceiveProps(nextProps){
-    if ( this.props.live.name != nextProps.live.name) {
-      // handles refresh, runs anytime it thinks props might have chagned
-      this.setState({live: Object.assign({}, nextProps.live)});
-    }
-  }
-
   componentDidMount(){
     let move = this.context.router.push;
     console.log(move)
@@ -101,26 +92,23 @@ class LivePage extends React.Component {
     t = t.bind(this);
     let sg = this.saveGame;
     sg = sg.bind(this);
-    //console.log(this.state.live.game)
+    console.log(this.state.live.game)
     let game = this.state.live.game;
     let live = {};
-    live = this.state.live;
-    console.log(this.state.live);
-    let f = this.forceUpdate;
+
+
 
 
     firebase.database().ref("live/").on("child_changed", function(snapshot){
-      console.log("made it")
+      console.log(game)
       let h = snapshot.val().home;
       let a = snapshot.val().away;
       if (h > 21 || a > 21){
         return false;
       }
-      t({home: h, away: a, live:{home:h, away:a, game:snapshot.val().game, name:snapshot.val().game.league_name }});
+      t({home: h, away: a});
       game.scores.left = h;
       game.scores.right = a;
-      game.player_names.player_r_1 = snapshot.val().game.player_names.player_r_1;
-      game.player_names.player_l_1 = snapshot.val().game.player_names.player_l_1;
       if (h == 21 || a == 21){
         console.log("game over")
         sg();
@@ -147,23 +135,7 @@ class LivePage extends React.Component {
 
 
     let x = this.state.live;
-    x.game = {
-      "game_type" : "",
-      "id" : "",
-      "league_name" : "nd",
-      "player_names" : {
-        "player_l_1" : "",
-        "player_l_2" : "",
-        "player_r_1" : "",
-        "player_r_2" : ""
-      },
-      "scores" : {
-        "left" : "",
-        "right" : ""
-      },
-      "winner" : "",
-      "winner_id": "",
-      "loser_id": ""};
+    x.game = {};
     this.props.liveactions.saveLive(x).catch(error => {
       toastr.error(error);
       this.setState({saving: false});
@@ -175,12 +147,11 @@ class LivePage extends React.Component {
   render() {
     //console.log(JSON.parse(localStorage.getItem('user')));
 
-    let login = ((JSON.parse(localStorage.getItem('users'))));
+    let login = ((JSON.parse(localStorage.getItem('user'))).uid);
     let homenum = 0;
     let awaynum = 0;
  //   this.homeup();
  //   this.awayup();
- console.log(this.state.live)
     return (
 
       <div className="jumbotron">
@@ -188,9 +159,8 @@ class LivePage extends React.Component {
       <table className="table" id="bigT">
         <thead>
         <tr>
-          <th><h2>{uidLookup(this.state.live.game.player_names.player_l_1 , ((JSON.parse(localStorage.getItem('users'))))).displayName }</h2></th>
-          { console.log(this.state)}
-          <th><h2>{uidLookup(this.state.live.game.player_names.player_r_1 , ((JSON.parse(localStorage.getItem('users'))))).displayName}</h2></th>
+          <th><h2>{uidLookup(this.state.live.game.player_names.player_l_1, this.state.users).displayName}</h2></th>
+          <th><h2>{uidLookup(this.state.live.game.player_names.player_r_1, this.state.users).displayName}</h2></th>
         </tr>
         </thead>
         <tbody>
@@ -232,7 +202,6 @@ function mapStateToProps(state, ownProps){
 
     //console.log(state.lives);
   // need to look up stored game in live game thing here
-  live.game = game
   for(var x in state.lives){
     if (state.lives[x].name == liveId){
       live = state.lives[x];
@@ -248,7 +217,7 @@ function mapStateToProps(state, ownProps){
 
     };
   });
-  console.log(state.users)
+
   return {
     game: game,
     authors: authorsFormattedForDropdown,
@@ -273,14 +242,10 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(LivePage);
 
 function uidLookup(uid, users){
-  console.log(users)
-  if (uid == ""){
-    return {displayName: "test"}
-  }
   for(var x in users){
     if (users[x].uid === uid){
       return users[x];
     }
   }
-  return "dasfasdf";
+  return false;
 }
