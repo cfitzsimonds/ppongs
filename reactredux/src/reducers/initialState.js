@@ -5,5 +5,6 @@ export default {
   users: [],
   leagues: [],
   lives: [],
+  tournaments: [],
   ajaxCallsInProgress: 0
 };
