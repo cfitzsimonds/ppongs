@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Ping Pong online scorekeeper",
   "author": "Ryan Michalec",
-  "scripts":{
+  "scripts": {
     "prestart": "babel-node tools/startMessage.js",
     "start": "npm-run-all --parallel open:src lint:watch test:watch",
     "open:src": "babel-node tools/srcServer.js",
@@ -16,16 +16,19 @@
     "build:html": "babel-node tools/buildHtml.js",
     "prebuild": "npm-run-all clean-dist  build:html",
     "build": "babel-node tools/build.js",
-    "postbuild" : "firebase deploy"
-
+    "postbuild": "firebase deploy"
   },
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "6.8.0",
     "bootstrap": "3.3.6",
+    "expose-loader": "^0.7.1",
     "jquery": "2.2.3",
+    "modular-adal-angular": "^0.3.0",
+    "q": "^1.4.1",
     "react": "15.0.2",
     "react-dom": "15.0.2",
+    "react-native-azure-ad": "^0.1.0",
     "react-redux": "4.4.5",
     "react-router": "2.4.0",
     "react-router-redux": "4.0.4",

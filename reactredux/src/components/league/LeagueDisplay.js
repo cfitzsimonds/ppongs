@@ -2,9 +2,13 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import * as leagueActions from '../../actions/leagueActions';
+import * as tournamentActions from '../../actions/tournamentActions';
+import * as userActions from '../../actions/userActions';
 import GameList from '../game/GameList';
 import UserList from '../users/UserList';
 import {browserHistory} from 'react-router';
+
 
 class LeagueDisplay extends React.Component {
   constructor(props, context){
@@ -22,7 +26,9 @@ class LeagueDisplay extends React.Component {
 
 
   }
-
+  createTournament(event){
+    event.preventDefault();
+  }
   /*componentWillReceiveProps(nextProps){
     if ( this.props.league && this.props.league.uid!= nextProps.league.uid) {
       // handles refresh, runs anytime it thinks props might have chagned
@@ -89,4 +95,12 @@ LeagueDisplay.propTypes = {
   users: PropTypes.array.isRequired,
   games: PropTypes.array.isRequired
 };
-export default connect(mapStateToProps)(LeagueDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(LeagueDisplay);
+function mapDispatchToProps(dispatch) {
+
+  return {
+    leagueactions: bindActionCreators(leagueActions, dispatch),
+    useractions: bindActionCreators(userActions, dispatch)
+
+  };
+}

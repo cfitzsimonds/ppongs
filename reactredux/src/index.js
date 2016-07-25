@@ -14,7 +14,7 @@ import {loadLives} from './actions/liveActions';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
-
+var Adal = require('./adal/adal-request');
 // would render from server here
 const store = configureStore();
 store.dispatch(loadCourses());
@@ -22,8 +22,8 @@ store.dispatch(loadAuthors());
 store.dispatch(loadGames());
 store.dispatch(loadUsers());
 store.dispatch(loadLeagues());
-store.dispatch(loadLives()); 
-
+store.dispatch(loadLives());
+Adal.processAdalCallback();
 render(
   <Provider store={store}>
   <Router history={browserHistory} routes={routes} />
