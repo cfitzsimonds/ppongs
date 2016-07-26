@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import GlobalUserList from '../users/GlobalUserList';
 import {connect} from 'react-redux';
-
+var Adal = require('../../adal/adal-request');
 
 class HomePage extends React.Component {
   constructor(props, context){
@@ -15,8 +15,13 @@ class HomePage extends React.Component {
       home: 0,
       away: 0
     };
-
-
+Adal.processAdalCallback();
+Adal.adalRequest({
+      url: 'https://graph.microsoft.com/v1.0/me/memberOf?$top=500',
+      headers: {
+        'Accept': 'application/json;odata.metadata=full'
+      }
+    })
   }
 
   testasdf(){
