@@ -60,7 +60,7 @@ var updateDataFromCache = function(resource) {
   var token = _adal.getCachedToken(resource);
   _oauthData.isAuthenticated = token !== null && token.length > 0;
   var user = _adal.getCachedUser() || { userName: '' };
-  console.log(user)
+  console.log(_adal)
   _oauthData.userName = user.userName;
   _oauthData.profile = user.profile;
   _oauthData.loginError = _adal.getLoginError();

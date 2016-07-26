@@ -2,9 +2,16 @@ import React, {PropTypes} from 'react';
 import { Link, IndexLink } from 'react-router';
 import LoadingDots from './LoadingDots';
 import {browserHistory} from 'react-router';
+var Adal = require('../../adal/adal-request');
 
 const Header = ({loading}) => {
-  
+  Adal.processAdalCallback();
+  Adal.adalRequest({
+        url: 'https://graph.microsoft.com/v1.0/me/memberOf?$top=500',
+        headers: {
+          'Accept': 'application/json;odata.metadata=full'
+        }
+      })
   //firebase.database().ref("leagues/").push({name:"test", uid: "146651333333", admin:"A5it5HJdRtXiBM3dKyRAjUME5wz2", pin:"1234", members:["A5it5HJdRtXiBM3dKyRAjUME5wz2", "4Q7lBJlRX5M5sg3wCXTPdUTpDwy1"]});
   if(!(JSON.parse(localStorage.getItem('user')))){
     localStorage.setItem('user', JSON.stringify({
