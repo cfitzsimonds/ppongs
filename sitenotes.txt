@@ -167,3 +167,8 @@ c0:3f:d5:60:cd:08
 is currently always a user behind - fixed
 
 192.168.200.158
+
+
+https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=rmichalec@rightpoint.com&UA=0&size=HR128x128&sc=1469621861740
+
+https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=rmichalec@rightpoint.com&UA=0&size=HR648x648   //&sc=1469621861740

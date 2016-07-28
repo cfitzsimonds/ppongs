@@ -5,6 +5,7 @@ import * as userActions from '../../actions/userActions';
 import {browserHistory} from 'react-router';
 import UserList from './UserList';
 import toastr from 'toastr';
+var Adal = require('../../adal/adal-request');
 
 class UsersPage extends React.Component {
   constructor(props, context){
@@ -113,6 +114,7 @@ class UsersPage extends React.Component {
       "uid" : "",
       "elo" : 0
     }));
+    Adal.login().then(function(){console.log("back")})
     if (!firebase.auth().currentUser) {
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then(function (result) {

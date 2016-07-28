@@ -5,6 +5,23 @@ var adalConfig = require('./adal-config');
 var _adal = new AuthenticationContext(adalConfig);
 var _oauthData = { isAuthenticated: false, userName: '', loginError: '', profile: '' };
 
+var login = function(){
+  return new Promise((resolve, reject) => {
+
+    adalRequest({
+          url: 'https://graph.microsoft.com/v1.0/me/memberOf?$top=500',
+          headers: {
+            'Accept': 'application/json;odata.metadata=full'
+          }
+        })
+
+resolve( true);
+  });
+
+}
+var getUser = function(){
+  return _adal;
+}
 var processAdalCallback = function() {
   var hash = window.location.hash;
 
@@ -60,7 +77,6 @@ var updateDataFromCache = function(resource) {
   var token = _adal.getCachedToken(resource);
   _oauthData.isAuthenticated = token !== null && token.length > 0;
   var user = _adal.getCachedUser() || { userName: '' };
-  console.log(_adal)
   _oauthData.userName = user.userName;
   _oauthData.profile = user.profile;
   _oauthData.loginError = _adal.getLoginError();
@@ -181,7 +197,8 @@ var adalRequest = function(settings) {
       }
     }
   }, function() {
-    _adal.login();
+  //  console.log(here);
+    console.log(_adal.login());
   })
 
   return deferred.promise;
@@ -189,5 +206,7 @@ var adalRequest = function(settings) {
 
 module.exports = {
   adalRequest: adalRequest,
-  processAdalCallback: processAdalCallback
+  processAdalCallback: processAdalCallback,
+  login: login,
+  getUser: getUser
 }

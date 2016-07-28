@@ -57,6 +57,7 @@ class UserApi {
 
           firebase.database().ref("users/").push(user);
           localStorage.setItem('user', JSON.stringify(user));
+          resolve(user)
         }
 
 
