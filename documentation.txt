@@ -1,0 +1,63 @@
+Ping Pong app Documentation
+
+The app is written in React and Redux.  It currently uses Firebase to store
+its data.  
+
+Like every React app, PPongs is a SPA that is broken up into components.  This
+document will attempt to explain each of them and how they interact.  
+
+
+Users:
+Currently, the user information is actually gathered in the header.  If
+already logged into your corporation's office 365 network, no logging in will
+be required.  If not, then you will be redirected to the corporation's single
+sign on page.  You should also be automatically enrolled in a league based on
+your corporation.  One logged in, you should see a navbar with the options:
+
+Home | About | Games | Leagues | HeadToHead | My Profile | Game confirmations (9)
+
+The source for the header is all located at
+/reactredux/src/components/common/Header.js
+
+It's primary function is to check if the user is authenticated or not - if
+not, it will hide the navbar and redirect the user to log in.  It currently
+checks for authentication by looking at whether or not the user data is
+correctly stored in local storage. It also handles the creation of the links
+in the navigation bar.
+
+Components:
+
+About
+The about page is the most simple.  Right now, it only contains a brief text
+description of how to use the application.  In the future, it could be used to
+share video tutorials or screenshots of how to use the app, as well as creator
+or version information.  
+
+Common
+The common folder contains the source code for the Header, the LoadingDots,
+the SelectInput, and the TextInput.  I already have covered header earlier.
+LoadingDots is what you see in the navbar to indicate if a page is still
+loading in information or not.  TextInput and SelectInput are generic wrappers
+for html input types - these are used in the different places that forms
+appear in the app.  
+
+Game
+Game is the folder that contains the tools that build up the way games are
+displayed as well as how they are added.  It is probably the most complicated
+piece of the app.
+
+GameListRow contains the code for each row of the table that the displays the
+game history of the leagues.  It shows the players of each side, the score of
+the game, and who won.  
+
+GameList is a table built up of GameListRows.  It takes a league and displays
+all the game history of that league.  
+
+GamesPage is what you will find when navigating your browser to /games.  It
+contains a GameList for each individual league that you belong to.  
+
+ManageGamePage just nests a GameForm
+
+GameForm is a form for adding a game to the records.  It contains SelectInputs
+for the type of game, the league that the game will be in, and the names of
+the players, as well as a TextInput for 

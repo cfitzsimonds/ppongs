@@ -52,7 +52,6 @@ const Header = ({loading}) => {
   let login = ((JSON.parse(localStorage.getItem('user'))).uid);
   if(!login){
     Adal.login().then(function(){
-      console.log(Adal.getUser()._user);
       if(!uidLookup(Adal.getUser()._user.profile.oid, (JSON.parse(localStorage.getItem('users'))))){
         userApi.saveUser(convertToStoreUser(Adal.getUser()._user)).then(function(stuff){
           localStorage.setItem('user', JSON.stringify(stuff))

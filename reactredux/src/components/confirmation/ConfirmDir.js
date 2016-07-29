@@ -46,6 +46,7 @@ class ConfirmGamesPage extends React.Component {
     //let scorecomp = 1;
     //if error here persists, refer to dispatch create andupdate -- Fix was to add bind of this context
 
+    console.log(game)
     //this.setState({game:game});
     this.props.gameActions.saveGame(game)
       .then(() => this.saveUser())
