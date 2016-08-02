@@ -50,12 +50,8 @@ class HomePage extends React.Component {
  //   this.homeup();
  //   this.awayup();
     return (
-
+      <div className="container">
       <div className="jumbotron">
-
-
-
-
         <h1>PPong</h1>
         <p>Ping Pong Online Game Scorer&nbsp;</p>
         <Link to="users" className="btn btn-primary btn-lg">Log in/out</Link>&nbsp;
@@ -64,6 +60,7 @@ class HomePage extends React.Component {
         {login? <Link to="game" className="btn btn-primary btn-lg">Add a game</Link>:""}&nbsp;
         <h2>Top ranking players:</h2>
         <GlobalUserList users={this.props.users}/>
+      </div>
       </div>
     );
   }
