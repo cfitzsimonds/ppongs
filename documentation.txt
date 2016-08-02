@@ -1,10 +1,10 @@
 Ping Pong app Documentation
 
 The app is written in React and Redux.  It currently uses Firebase to store
-its data.  
+its data.
 
 Like every React app, PPongs is a SPA that is broken up into components.  This
-document will attempt to explain each of them and how they interact.  
+document will attempt to explain each of them and how they interact.
 
 
 Users:
@@ -31,7 +31,7 @@ About
 The about page is the most simple.  Right now, it only contains a brief text
 description of how to use the application.  In the future, it could be used to
 share video tutorials or screenshots of how to use the app, as well as creator
-or version information.  
+or version information.
 
 Common
 The common folder contains the source code for the Header, the LoadingDots,
@@ -39,7 +39,7 @@ the SelectInput, and the TextInput.  I already have covered header earlier.
 LoadingDots is what you see in the navbar to indicate if a page is still
 loading in information or not.  TextInput and SelectInput are generic wrappers
 for html input types - these are used in the different places that forms
-appear in the app.  
+appear in the app.
 
 Game
 Game is the folder that contains the tools that build up the way games are
@@ -48,16 +48,138 @@ piece of the app.
 
 GameListRow contains the code for each row of the table that the displays the
 game history of the leagues.  It shows the players of each side, the score of
-the game, and who won.  
+the game, and who won.
 
 GameList is a table built up of GameListRows.  It takes a league and displays
-all the game history of that league.  
+all the game history of that league.
 
 GamesPage is what you will find when navigating your browser to /games.  It
-contains a GameList for each individual league that you belong to.  
+contains a GameList for each individual league that you belong to.
 
 ManageGamePage just nests a GameForm
 
 GameForm is a form for adding a game to the records.  It contains SelectInputs
 for the type of game, the league that the game will be in, and the names of
-the players, as well as a TextInput for 
+the players,filtered from those who belong in the selected league as well as 
+a TextInput for the scores.  If the league supports live mode, than above 
+the score boxes, you would have
+the ability to press the go live button to enter the live scoreboard mode
+instead of typing in the score, if so desired.  
+
+The submission to the database ususes the react redux model.  There in an api
+connected to the store in the api folder.  The one that manages games is
+called ppongApi.js.  It simply allows to either submit a game to add to the
+database or to download the updated database (which is what is connected to
+the store, as per usual with redux).  
+
+Live
+The live page is quite simple, it simply listens to changes in the database
+triggered by the amazon dash buttons, so long as a connected app is running on
+the same network as the buttons.  (The code for this is here was well, but I
+was unable to get it running on windows hosts, so Linux or Mac only due to
+issues with the required node libraries.  Ideally a  raspberry pi sitting 
+in the corner always on would get the job done).  
+When the score hits 21, it automatically submits to the database.  
+
+Confirmations
+A game that is submitted to the database does not immediatley get added to the
+games, first it is tagged as unconfirmed.  When the player who was designated
+as the opponent checks their game confirmations tab, they will be presented
+with the list of games that they participated in that are still unconfirmed.
+They can also press buttons inline to confirm or deny whether or not the
+results of the game are accurate.  This could easily be abused by a sore
+loser, but I weighted that as safer than just allowing people to continually
+add games, which could completley break the system, especially the player
+skill ranking.  
+
+Head to Head 
+This is the most simple.  It is effectivley just an implementation of
+GamesPage, but it allows you to use select menus to filter the games down to
+only show games that contain certain people.  
+
+Leagues
+League are also fairly simple.  There is a list of the leagues that the player
+belongs to.  If any of them are clicked on, they naviage to their page, which
+shows the list of players in the league, their standings, and the history of
+the games that occurred in the league.  
+
+The add league buttons lets the player select the name of the league to be
+joined and a blank to enter the secret pin number of the league.  Create a
+league allows you to specify the name of the league you'd like to create and
+the secret entry pin others will have to enter to join your league.  
+
+
+Api
+Inside of the api folder, there is a api for every action that the software
+can make.  All that it really does is communicate with the firebase database
+that it uses to store the data.  It also provides some simple validation to
+ensure all entries work.  There are apis for users, games, leagues, and the
+live feed. Each one functions almost identically, they handle differnt data
+sets but for the most part just do pushing and pulling from the database.  The
+only thing that changes substantially each time is the validation, and which
+elements are added before posting to the server (eg. the users get profile
+pictures added while the games get time and date added).  
+
+npm scripts:
+the command npm start will deploy the src folder to localhost:3000
+The command npm run build will minify and translate the code with babel into
+the dist folder before deploying it to firebase.  
+
+actions folder:
+these should not be altered unless new apis are added.  They are all clones of
+eachother, helping map the dispatches to the store actions.  (redux stuff).
+What is crucial is that in making a new api or element in the store, a new
+version with all of the same actions is created.  
+
+store
+There are three files here.  The configureStore.js file helps select which
+ont to build.  The other two files are for use in development or production
+simply because there are some react features that need to be disabled in
+production as they are good for debugging but are fairly inneficient.  
+
+Reducers:
+Reducers are a part of the communication layer in react.  Each element in the
+store is bound to a reducer that handles the different actions that it makes.  
+
+controller.js:
+terminal client for live page.  Basically just sends ajax requests to
+firebase.
+
+network.js:
+code that runs to scan for the amazon dash buttons and make the ajax call on
+firebase (note, currently *nix only)
+
+Adal
+Adal-request houses the code that interacts with Azure Active Directory.  It
+has the functions for making requests to Azure as well as things like logging
+in and out.  Adal-config stores the information about the specific Active
+directory and azure tenant that the app is connected to.  
+
+
+Index.html
+html that loads in the spa and some of the required components for the
+database.  
+
+Index.js
+Script that sets up the spa - initializes the stores, Adal, and the history,
+as well as inserting the app into the page.  
+
+routes.js
+Sets up the way that the spa will handle routing based on urls.  Can use the
+/: syntax in order to take in variables from the url to use in the code (for
+an example look at the user profiles page).  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

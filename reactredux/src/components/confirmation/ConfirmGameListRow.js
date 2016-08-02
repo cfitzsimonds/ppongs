@@ -20,7 +20,7 @@ const ConfirmGameListRow = function({game, users, currentUser,confirm, deny, num
       <td><Link to={"/profile/"+game.player_names.player_r_1}>{uidToNameLookup(game.player_names.player_r_1, users)}</Link><br />
         <Link to={"/profile/"+game.player_names.player_r_2}>{uidToNameLookup(game.player_names.player_r_2, users)}</Link></td>
 
-      <td>{game.winner} Side</td>
+      <td>{(game.winner === "Left")? "Home": "Away"} Team</td>
 
       <input
         name={num.toString()}

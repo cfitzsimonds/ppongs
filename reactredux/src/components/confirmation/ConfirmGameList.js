@@ -4,7 +4,7 @@ import ConfirmGameListRow from './ConfirmGameListRow';
 // Need to come back and add columns/formatting
 
 const ConfirmGameList = ({games, users, uid, league, uid2, uid3, uid4, uids, currentUser, confirm, deny}) => {
-  
+
   if (uid){
     games = games.filter(function(game){
       for (var i in game.player_names){
@@ -75,10 +75,10 @@ const ConfirmGameList = ({games, users, uid, league, uid2, uid3, uid4, uids, cur
       <thead>
       <tr>
         <th>Game Date</th>
-        <th>Left Team</th>
-        <th>Left Score</th>
-        <th>Right Score</th>
-        <th>Right Team</th>
+        <th>Home Team</th>
+        <th>Home Score</th>
+        <th>Away Score</th>
+        <th>Away Team</th>
         <th>Winner</th>
 
       </tr>

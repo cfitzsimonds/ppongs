@@ -44,6 +44,8 @@ class UserApi {
               doubles: 0
             }
           };
+
+          // need to change this to parsing based on email addressand looking up in the table of leagues
           user.leagues = [{text:"Rightpoint Detroit",value: "1466513558321" }];
           user.elo = 1500;
           user.league_stats = {"1466513558321" : {

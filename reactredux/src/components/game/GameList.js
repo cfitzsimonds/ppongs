@@ -85,7 +85,12 @@ const GameList = ({games, users, uid, league, uid2, uid3, uid4, uids}) => {
       </tr>
       </thead>
       <tbody>
-      {games.map(game =>
+      {games.sort(function(a, b){
+        if(a.id > b.id){
+          return -1;
+        }
+        return 1;
+      }).map(game =>
         <GameListRow key={game.id} game={game} users={users}/>
       )}
       </tbody>

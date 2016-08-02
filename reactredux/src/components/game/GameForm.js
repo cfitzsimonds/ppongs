@@ -27,7 +27,7 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
 
       <SelectInput
         name="player_names.player_l_1"
-        label="You"
+        label="You (Home)"
         value={game.player_names.player_l_1 }
         defaultOption="Select yourself"
         options={[{value:currentPlayer.uid, text: currentPlayer.displayName}]}
@@ -40,7 +40,7 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
 
       <SelectInput
         name="player_names.player_l_2"
-        label="Your Partner"
+        label="Your Partner (Home)"
         value={game.player_names.player_l_2}
         onChange={onChange}
         defaultOption="Select your partner"
@@ -61,7 +61,7 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
 
       <SelectInput
         name="player_names.player_r_1"
-        label="Your Opponent"
+        label="Your Opponent (Away)"
         value={game.player_names.player_r_1}
         onChange={onChange}
         defaultOption="Select your opponent"
@@ -79,7 +79,7 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         error={errors.player_r_1}/>
       <SelectInput
         name="player_names.player_r_2"
-        label="Your Opponents Partner"
+        label="Your Opponents Partner (Away)"
         value={game.player_names.player_r_2}
         onChange={onChange}
         defaultOption="Select your opponent's partner"
@@ -99,7 +99,8 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         error={errors.player_r_2}
         disabled={game.game_type -2}
       />
-
+    // Need to either add a check to see if a league has a live mode to allow this to show
+    // or just remove it, depending
       <input
         type="submit"
         disabled={!((!!game.game_type)&&(!!game.league_name)&&
@@ -109,18 +110,19 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         value={'Go live'}
         className="btn btn-primary"
         onClick={live}
+        hidden={live}
       />
     <br />
     &nbsp;
       <TextInput
         name="scores.left"
-        label="Left Team Score"
+        label="Your Team (Home)'s Score"
         value={game.scores.left}
         onChange={onChange}
         error={errors.left}/>
       <TextInput
         name="scores.right"
-        label="Right Team Score"
+        label="Opposing Team (Away)'s Score"
         value={game.scores.right}
         onChange={onChange}
         error={errors.right}/>

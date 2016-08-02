@@ -84,12 +84,11 @@ const Header = ({loading}) => {
               :"/users"} activeClassName="active">
                 {((JSON.parse(localStorage.getItem('user'))).uid)?
                   "My Profile":
-                  "Login"}
-          </Link>):
-          (<Link to="/users" activeClassName="active">Log in</Link>)}
+                  ""}
+          </Link>):""
+        }
 
-      {login? " | " : ""}
-      {login? <Link to="/users" activeClassName="active">Log Out</Link> : ""}
+
       {login? " | " : ""}
       {login? <Link to="/confirm" activeClassName="active">{login? "Game confirmations " : ""}
         {login? "("+(((JSON.parse(localStorage.getItem('user'))).confirmlist|| ["a"]).length-1 ) +")": ""}</Link> : ""}

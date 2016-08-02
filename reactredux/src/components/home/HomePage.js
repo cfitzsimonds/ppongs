@@ -57,7 +57,6 @@ class HomePage extends React.Component {
 
         <h1>PPong</h1>
         <p>Ping Pong Online Game Scorer&nbsp;</p>
-        <Link to="users" className="btn btn-primary btn-lg">Log in/out</Link>&nbsp;
         <Link to="about" className="btn btn-primary btn-lg">Learn More</Link>&nbsp;
 
         {login? <Link to="game" className="btn btn-primary btn-lg">Add a game</Link>:""}&nbsp;
