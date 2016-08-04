@@ -5,7 +5,14 @@ import SelectInput from '../common/SelectInput';
 const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPlayer, live}) => {
 //  console.log(currentPlayer.leagues)
   return (
-    <div>
+        <div className="container-fluid">
+            <div className="hero-inner game">
+                <div className="container">
+                    <h1>Games</h1>
+                </div>
+            </div>
+        <div className="container inner">
+
       <h1>Add Game</h1>
 
       <SelectInput
@@ -99,8 +106,8 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         error={errors.player_r_2}
         disabled={game.game_type -2}
       />
-    // Need to either add a check to see if a league has a live mode to allow this to show
-    // or just remove it, depending
+    {// Need to either add a check to see if a league has a live mode to allow this to show// or just remove it, depending
+    }
       <input
         type="submit"
         disabled={!((!!game.game_type)&&(!!game.league_name)&&
@@ -136,7 +143,7 @@ const GameForm = ({game, allPlayers, onSave, onChange, saving, errors, currentPl
         onClick={onSave}
       />
 
-    </div>
+    </div></div>
   );
 };
 

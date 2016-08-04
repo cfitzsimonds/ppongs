@@ -16,7 +16,7 @@ class UsersPage extends React.Component {
     //this.checkAuth = this.checkAuth.bind(this);
     //this.setState({currentUser: "In"});
     //let temp = (firebase.auth().currentUser) ? "out": "in";
-     this.state = {  
+     this.state = {
       currentUser : 'in'
     }
 
@@ -148,22 +148,36 @@ class UsersPage extends React.Component {
     const {users} = this.props;
 
     //this.checkAuth();
-    let loggedout = (<div>
-      <h1>Users</h1>
-      <input type="submit"
-             value={"Log " + (this.state.currentUser)}
-             className="btn btn-primary"
-             onClick={this.redirectToAddUserPage}
-      />
-    </div>);
-    let loggedin = (<div>
-      <h1>Logged in! </h1>
-      <input type="submit"
-             value={"Log " + (this.state.currentUser)}
-             className="btn btn-primary"
-             onClick={this.redirectToAddUserPage}
-      />
-    </div>);
+    let loggedout = (
+
+      <div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>Users</h1>
+                    <input type="submit"
+                           value={"Log " + (this.state.currentUser)}
+                           className="btn btn-primary"
+                           onClick={this.redirectToAddUserPage}
+                    />
+                </div>
+            </div>
+      </div>
+    );
+    let loggedin = (
+
+<div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>Users</h1>
+                    <input type="submit"
+                 value={"Log " + (this.state.currentUser)}
+                 className="btn btn-primary"
+                 onClick={this.redirectToAddUserPage}
+          />
+                </div>
+            </div>
+      </div>
+    );
     return (((!(/[^a-zA-Z0-9]/.test(localStorage.getItem('userid'))))&&!((localStorage.getItem('userid'))=== null))? loggedin : (loggedout));
   }
 }

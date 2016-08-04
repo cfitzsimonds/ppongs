@@ -30,19 +30,11 @@ class LeaguesPage extends React.Component {
     let user = getUserById(this.props.users, (JSON.parse(localStorage.getItem('user'))).uid);
     const {leagues} = this.props;
     return (
-      <div>
-        <h1>My Leagues</h1>
-
-        <LeagueList leagues={leagues.filter(function(el){
-          for (var i in user.leagues){
-            if (user.leagues[i].value == el.uid){
-              return true;
-            }
-
-          }
-          return false;
-        })}/> <br />
-        <input type="submit"
+      <div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>My Leagues</h1>
+                     <input type="submit"
                value="Join League"
                className="btn btn-primary"
                onClick={this.redirectToAddLeaguePage}
@@ -50,10 +42,23 @@ class LeaguesPage extends React.Component {
         &nbsp;
         <input type="submit"
                value="Create a League"
-               className="btn btn-primary"
+               className="btn btn-secondary"
                onClick={this.redirectToCreateLeaguePage}
         />
-      </div>
+                  </div>
+              </div>
+          <div className="container inner">
+
+          <LeagueList leagues={leagues.filter(function(el){
+            for (var i in user.leagues){
+              if (user.leagues[i].value == el.uid){
+                return true;
+              }
+
+            }
+            return false;
+          })}/>
+        </div></div>
     );
   }
 }
