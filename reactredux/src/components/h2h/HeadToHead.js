@@ -42,9 +42,15 @@ class HeadToHeadPage extends React.Component {
     let users = this.props.users ;
 
     return (
-      <div>
-        <h1>Head to Head</h1>
-        <h3>Tables below will show only games that contain selected players</h3>
+      <div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>Head To Head</h1>
+                </div>
+            </div>
+        <div className="container inner">
+
+        
 
         {[0,1,2,3].map(function (el, ins){
           return (<div key={ins}><SelectInput
@@ -77,7 +83,7 @@ class HeadToHeadPage extends React.Component {
             <GameList  games={games} users={users} league={el.value} uid={this.state.uids[0]} uids={this.state.uids}/></div>)
         }.bind(this))}
 
-      </div>
+      </div></div>
     );
   }
 }

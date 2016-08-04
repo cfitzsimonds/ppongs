@@ -231,8 +231,14 @@ class ConfirmGamesPage extends React.Component {
     let user = this.props.user|| {leagues: []};
     let users = this.props.users ;
     return (
-      <div>
-        <h1>Confirmations</h1>
+
+<div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>Confirmations</h1>
+                </div>
+            </div>
+        <div className="container inner">
 
         {user.leagues.map(function(el){
           return (<div key={el.value}><h3>{el.text}</h3>
@@ -244,7 +250,7 @@ class ConfirmGamesPage extends React.Component {
             /></div>)
         }.bind(this))}
 
-      </div>
+      </div></div>
     );
   }
 }

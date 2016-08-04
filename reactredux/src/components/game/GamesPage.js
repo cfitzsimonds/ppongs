@@ -34,19 +34,22 @@ class GamesPage extends React.Component {
     let user = this.props.user|| {leagues: []};
     let users = this.props.users ;
     return (
-      <div>
-        <h1>Games</h1>
-        <input type="submit"
-               value="Add Game"
-               className="btn btn-primary"
-               onClick={this.redirectToAddGamePage}
+      <div className="container-fluid">
+            <div className="hero-inner game">
+                <div className="container">
+                    <h1>Games</h1>
+                      <input type="submit"
+                           value="Add Game"
+                           className="btn btn-primary"
+                           onClick={this.redirectToAddGamePage}
 
-        />
-        {user.leagues.map(function(el){
-          return (<div key={el.value}><h3>{el.text}</h3>
-          <GameList  games={games} users={users} league={el.value}/></div>)
-        })}
-
+                    />
+                    {user.leagues.map(function(el){
+                      return (<div key={el.value}><h3>{el.text}</h3>
+                      <GameList  games={games} users={users} league={el.value}/></div>)
+                    })}
+                </div>
+            </div>
       </div>
     );
   }

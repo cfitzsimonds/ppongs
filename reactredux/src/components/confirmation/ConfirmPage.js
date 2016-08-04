@@ -202,6 +202,15 @@ class ManageGamePage extends React.Component {
 
   render(){
     return (
+
+<div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>Confirmations</h1>
+                </div>
+            </div>
+        <div className="container inner">
+
       <div>
     {this.state.user.confirmlist.slice(1).map(function(el){
       return(
@@ -225,7 +234,7 @@ class ManageGamePage extends React.Component {
         saving={this.state.saving}
         currentPlayer={this.state.user}
       />
-        </div>
+        </div></div>
     );
   }
 }

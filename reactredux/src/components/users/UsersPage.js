@@ -27,13 +27,18 @@ class UsersPage extends React.Component {
     const {users} = this.props;
     console.log(users);
     return (
-      <div>
-        <h1>Users</h1>
-        <input type="submit"
+    <div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>Users</h1>
+                    <input className="btn btn-primary" type="submit"
                value="Add User"
                className="btn btn-primary"
                onClick={this.redirectToAddUserPage}
         />
+                </div>
+            </div>
+        <div className="container inner">
         <UserList users={users}/>
       </div>
     );

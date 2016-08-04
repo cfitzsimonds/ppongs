@@ -5,8 +5,14 @@ import SelectInput from '../common/SelectInput';
 const GameForm = ({game, allPlayers, yes, no, onChange, saving, errors, currentPlayer}) => {
 //  console.log(currentPlayer.leagues)
   return (
-    <div>
-      <h1>Confirmations</h1>
+
+    <div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>Confirmations</h1>
+                </div>
+            </div>
+        <div className="container inner">
 
       {}
 
@@ -124,7 +130,7 @@ const GameForm = ({game, allPlayers, yes, no, onChange, saving, errors, currentP
         className="btn btn-primary"
         onClick={onSave}
       />
-    </div>
+    </div></div>
   );
 };
 

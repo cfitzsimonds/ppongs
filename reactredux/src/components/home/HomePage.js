@@ -50,17 +50,19 @@ class HomePage extends React.Component {
  //   this.homeup();
  //   this.awayup();
     return (
-      <div className="container">
-      <div className="jumbotron">
-        <h1>PPong</h1>
-        <p>Ping Pong Online Game Scorer&nbsp;</p>
-        <Link to="users" className="btn btn-primary btn-lg">Log in/out</Link>&nbsp;
-        <Link to="about" className="btn btn-primary btn-lg">Learn More</Link>&nbsp;
-
-        {login? <Link to="game" className="btn btn-primary btn-lg">Add a game</Link>:""}&nbsp;
-        <h2>Top ranking players:</h2>
-        <GlobalUserList users={this.props.users}/>
-      </div>
+      <div className="container-fluid">
+        <div className="hero">
+          <h1>React, Redux, and React Router in ES6 based game scoretracker</h1>
+          <Link to="users" className="btn btn-primary">Log in/out</Link>
+          <Link to="about" className="btn btn-secondary">Learn More</Link>
+          {login? <Link to="game" className="btn btn-primary btn-lg">Add a game</Link>:""}
+        </div>
+        <div className="container">
+          <div className="jumbotron">
+            <h2>Top ranking players:</h2>
+            <GlobalUserList users={this.props.users}/>
+          </div>
+        </div>
       </div>
     );
   }

@@ -5,9 +5,13 @@ import SelectInput from '../common/SelectInput';
 const JoinLeagueForm = ({allLeagues,onChange,onSave,league,errors,saving}) => {
   //console.log(allLeagues)
   return (
-    <div>
-      <h1>Join a league</h1>
-
+    <div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>Join A League</h1>
+                </div>
+            </div>
+        <div className="container inner">
       <SelectInput
         name="uid"
         label="League Name"
@@ -43,7 +47,7 @@ const JoinLeagueForm = ({allLeagues,onChange,onSave,league,errors,saving}) => {
         className="btn btn-primary"
         onClick={onSave}
       />
-    </div>
+    </div></div>
   );
 };
 

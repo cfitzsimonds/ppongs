@@ -36,23 +36,24 @@ const Header = ({loading}) => {
   } else {
     localStorage.setItem('user', JSON.stringify(uidLookup((JSON.parse(localStorage.getItem('user'))).uid, (JSON.parse(localStorage.getItem('users'))))));
   }
-  let login = ((JSON.parse(localStorage.getItem('user'))).uid);
+  // let login = ((JSON.parse(localStorage.getItem('user'))).uid);
+  let login = true;
   return (
 
     <nav>
 
-
+      <div className="header-container container">
+      <div className="navbar-brand">
+        <img className="img-responsive" src="http://www.reddiamonddigital.com/ppong/logo.png" />
+        </div>
       <IndexLink to="/" activeClassName="active">Home</IndexLink>
-      {" | "}
       <Link to="/about" activeClassName="active">About</Link>
-      {" | "}
       {login? <Link to="/games" activeClassName="active">Games</Link> : ""}
 
-      {login? " | " : ""}
       {login? <Link to="/leagues" activeClassName="active">Leagues</Link> : ""}
-      {login? " | " : ""}
+
       {login? <Link to="/h2h" activeClassName="active">HeadToHead</Link> : ""}
-      {login? " | " : ""}
+
       {
         // this looks messy, all it does is parse the user data so that if logged in it will bring you to your own profile
         ((JSON.parse(localStorage.getItem('user'))))?
@@ -65,12 +66,13 @@ const Header = ({loading}) => {
           </Link>):
           (<Link to="/users" activeClassName="active">Log in</Link>)}
 
-      {login? " | " : ""}
+      
       {login? <Link to="/users" activeClassName="active">Log Out</Link> : ""}
-      {login? " | " : ""}
+      
       {login? <Link to="/confirm" activeClassName="active">{login? "Game confirmations " : ""}
         {login? "("+(((JSON.parse(localStorage.getItem('user'))).confirmlist|| ["a"]).length-1 ) +")": ""}</Link> : ""}
       {loading && <LoadingDots interval={100} dots={20}/>}
+      </div>
     </nav>
   );
 };

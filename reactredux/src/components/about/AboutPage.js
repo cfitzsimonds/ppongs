@@ -3,8 +3,14 @@ import React from 'react';
 class AboutPage extends React.Component {
   render() {
     return (
-      <div>
-        <h1>About</h1>
+         <div className="container-fluid">
+            <div className="hero-inner">
+                <div className="container">
+                    <h1>About</h1>
+                </div>
+            </div>
+        <div className="container inner">
+
         <h4>Instructions:</h4>
         <p>If not logged in, click either login or users <br />
             If this is your first time, click on leagues then select your league and enter your league's pin <br />
@@ -18,7 +24,7 @@ class AboutPage extends React.Component {
             To view the history between any two players have leagues in common with you, click HeadToHead, and select the
             names of the players you would like to see.
         </p>
-      </div>
+      </div></div>
     );
   }
 }
