@@ -1,3 +1,5 @@
+// Configuration file - client id matches up with the ppongs application on rightpoint's azure AD
+
 var adalConfig = {
   tenant: 'common',
   clientId: '328722a2-8aa6-4b41-b723-97d7c4ab967a',

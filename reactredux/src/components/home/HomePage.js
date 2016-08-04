@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import GlobalUserList from '../users/GlobalUserList';
 import {connect} from 'react-redux';
-
+var image = require("../defaultPlayerIcon.png");
 
 class HomePage extends React.Component {
   constructor(props, context){
@@ -61,6 +61,7 @@ class HomePage extends React.Component {
 
         {login? <Link to="game" className="btn btn-primary btn-lg">Add a game</Link>:""}&nbsp;
         <h2>Top ranking players:</h2>
+            <img src={image} alt="Mountain View"  />
         <GlobalUserList users={this.props.users}/>
       </div>
     );

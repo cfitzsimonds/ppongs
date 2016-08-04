@@ -1,3 +1,5 @@
+// Defines interactoins with azure ad (basically creates a react compatible version of the full ADAL)
+
 var q = require('q');
 var AuthenticationContext = require('expose?AuthenticationContext!../../node_modules/modular-adal-angular/lib/adal.js');
 var adalConfig = require('./adal-config');
@@ -5,6 +7,7 @@ var adalConfig = require('./adal-config');
 var _adal = new AuthenticationContext(adalConfig);
 var _oauthData = { isAuthenticated: false, userName: '', loginError: '', profile: '' };
 
+// returns a promise that the use will login (makes a request, which forces the user to login if not logged in)
 var login = function(){
   return new Promise((resolve, reject) => {
 
@@ -19,9 +22,13 @@ resolve( true);
   });
 
 }
+
+// returns the information stored in the current adal session
 var getUser = function(){
   return _adal;
 }
+
+// Internal function that processes an adal action
 var processAdalCallback = function() {
   var hash = window.location.hash;
 
@@ -82,6 +89,7 @@ var updateDataFromCache = function(resource) {
   _oauthData.loginError = _adal.getLoginError();
 };
 
+// checks whether or not the user is authenticated in azure ad
 var isAuthenticated = function() {
   var deferred = q.defer();
 
@@ -116,6 +124,7 @@ var isAuthenticated = function() {
   return deferred.promise;
 }
 
+// makes the request to the servers based on the passed in information
 var makeRequest = function(settings) {
   var deferred = q.defer();
 

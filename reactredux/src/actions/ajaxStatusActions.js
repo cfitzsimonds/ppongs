@@ -1,3 +1,5 @@
+//Handles the dispatches for ajax calls
+
 import * as types from './actionTypes';
 
 export function beginAjaxCall() {

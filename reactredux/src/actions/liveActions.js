@@ -1,3 +1,5 @@
+//Handles the dispatches for calls to the live gmaes api calls
+
 import * as types from './actionTypes';
 import liveApi from '../api/liveApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';

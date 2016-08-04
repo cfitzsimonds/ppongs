@@ -1,3 +1,5 @@
+//Handles the dispatches for calls to the game api calls
+
 import * as types from './actionTypes';
 import gameApi from '../api/ppongApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';

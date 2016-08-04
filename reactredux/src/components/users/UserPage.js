@@ -16,7 +16,7 @@ class UsersPage extends React.Component {
     //this.checkAuth = this.checkAuth.bind(this);
     //this.setState({currentUser: "In"});
     //let temp = (firebase.auth().currentUser) ? "out": "in";
-     this.state = {
+     this.state = {  
       currentUser : 'in'
     }
 

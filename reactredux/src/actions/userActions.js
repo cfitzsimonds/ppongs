@@ -1,3 +1,5 @@
+//Handles the dispatches for calls to the users api calls
+
 import * as types from './actionTypes';
 import userApi from '../api/userApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
