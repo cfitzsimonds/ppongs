@@ -66,7 +66,7 @@ const Header = ({loading}) => {
 
       <div className="header-container container">
             <div className="navbar-brand">
-              <img className="img-responsive" src="http://www.reddiamonddigital.com/ppong/logo.png" />
+              <img className="img-responsive" src={require('../../assets/logo.png')} />
               </div>
             <IndexLink to="/" activeClassName="active">Home</IndexLink>
             <Link to="/about" activeClassName="active">About</Link>
