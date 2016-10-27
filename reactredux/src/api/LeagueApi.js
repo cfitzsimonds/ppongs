@@ -1,8 +1,14 @@
+// api + validation for league creation and access
+
 class LeagueApi {
+
+  // function for generating the id of a game - for scale this should change to be salted to prevent
+  // conflict of making two games at once
   static generateId(league) {
     return (new Date()).getTime();
   }
 
+// takes a league and either addds it to the databse or update a league already there
   static saveLeague(league) {
     league = Object.assign({}, league); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
@@ -17,7 +23,7 @@ class LeagueApi {
 
 
 
-
+       // if the user is already assgined, update
       if (league.uid) {
         //update
         firebase.database().ref("leagues").orderByChild("uid").on("child_added", function(snapshot) {
@@ -29,6 +35,8 @@ class LeagueApi {
         });
 
       } else {
+        //  if not addd= it to the rep
+
         // add
         //Just simulating creation here.
         //The server would generate ids and watchHref's for new courses in a real app.
@@ -43,6 +51,7 @@ class LeagueApi {
     });
   }
 
+  //resolve the list of leagues
   static getAllLeagues() {
     return new Promise((resolve,  reject) => {
       firebase.database().ref("leagues/").on('value', function (data) {
@@ -65,20 +74,3 @@ function isNumeric(n) {
 }
 
 export default LeagueApi;
-const league1 = {
-  league_type: 1,
-  player_names: {
-    player_l_1: "Ryan",
-    player_l_2: "",
-    player_r_1: "Michael",
-    player_r_2: ""
-  },
-  league_id: 1465916389175,
-  scores: {
-    left: 21,
-    right: 1
-  },
-  winner: "left",
-  league_name: "nd"
-
-};

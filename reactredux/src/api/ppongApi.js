@@ -1,3 +1,5 @@
+// Api that handles the storage of games
+
 class GameApi {
   static generateId(game) {
     return (new Date()).getTime();
@@ -10,10 +12,11 @@ class GameApi {
       // Simulate server-side validation
       const minGameTitleLength = 1;
 
-      // need rejection if any field is not filled
-      /*if (game.title.length < minGameTitleLength) {
-        reject(`Title must be at least ${minGameTitleLength} characters.`);
-      }*/
+      // need rejection and notification via toaste if any field is not filled
+
+
+
+      // validation , requirees all forms be filled before submission
 
       if(!(game.game_type>0)){
         reject("Must select a valid game type")

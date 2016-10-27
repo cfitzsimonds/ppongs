@@ -1,3 +1,5 @@
+// Api for handling the live games
+
 class LiveApi {
   static saveLive(game) {
     game = Object.assign({}, game); // to avoid manipulating object passed in.
@@ -6,7 +8,7 @@ class LiveApi {
       // Simulate server-side validation
       const minGameTitleLength = 1;
 
-        //update
+        //update on change in database
         firebase.database().ref("live").orderByChild("name").on("child_added", function(snapshot) {
           if(snapshot.val().name == game.name) {
             let x = {};
@@ -21,6 +23,7 @@ class LiveApi {
     });
   }
 
+  // resolve all live games in base
   static getAllLives() {
     return new Promise((resolve,  reject) => {
       firebase.database().ref("live/").on('value', function (data) {

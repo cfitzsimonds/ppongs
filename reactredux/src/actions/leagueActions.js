@@ -1,3 +1,6 @@
+//Handles the dispatches for calls to the leagues api calls
+
+
 import * as types from './actionTypes';
 import leagueApi from '../api/LeagueApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';

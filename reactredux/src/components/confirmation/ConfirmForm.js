@@ -6,7 +6,6 @@ const GameForm = ({game, allPlayers, yes, no, onChange, saving, errors, currentP
 //  console.log(currentPlayer.leagues)
   return (
     <div>
-      <h1>Confirmations</h1>
 
       {}
 
@@ -138,4 +137,3 @@ GameForm.propTypes = {
 };
 
 export default GameForm;
-
